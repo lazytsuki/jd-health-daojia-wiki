@@ -80,9 +80,9 @@ body {
   flex-shrink: 0;
 }
 
-.mastery-pill .bar { width: 60px; height: 4px; background: var(--card-border); border-radius: 2px; overflow: hidden; }
-.mastery-pill .fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); border-radius: 2px; transition: width 0.5s; }
-.mastery-pill .pct { color: var(--green); font-weight: 600; }
+
+
+
 
 /* ── Feedback Button ── */
 .feedback-btn {
@@ -273,9 +273,9 @@ body {
   margin-bottom: 20px;
 }
 .progress-wrap .label { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
-.progress-track { flex: 1; height: 6px; background: var(--card-border); border-radius: 3px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); border-radius: 3px; transition: width 0.6s; }
-.progress-text { font-size: 12px; font-weight: bold; color: var(--green); min-width: 40px; text-align: right; }
+
+
+
 
 /* ── Feedback Panel ── */
 #feedback-panel { display: none; }
@@ -440,9 +440,7 @@ body {
 
     <div class="progress-wrap">
       <span class="label">核心指标</span>
-      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-      <span class="progress-text" id="prog-pct">—</span>
-    </div>
+      </div>
 
     <div class="metric-strip">
       <div class="metric-pill">
@@ -454,11 +452,6 @@ body {
         <div class="lbl">五端协同</div>
         <div class="val blue">5</div>
         <div class="sub">C端·B端·护士端·实验室·运营端</div>
-      </div>
-      <div class="metric-pill">
-        <div class="lbl">已掌握</div>
-        <div class="val green" id="stat-done">0</div>
-        <div class="sub">共10个模块</div>
       </div>
       <div class="metric-pill">
         <div class="lbl">检-医转化</div>
@@ -1006,9 +999,7 @@ async function submitFeedback() {
 
 // ── Public Hub Initialization ──
 function initPublicHub() {
-  document.getElementById('prog-fill').style.width = '100%';
-  document.getElementById('prog-pct').textContent = '10';
-  document.getElementById('stat-done').textContent = '10';
+  
 }
 
 let skipObserver = false;
