@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>到家服务知识图谱 · v3.1</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --card-bg: #1c2128;
+  --card-border: #30363d;
+  --text: #e6edf3;
+  --text-dim: #8c99a8;
+  --accent: #f78166;
+  --blue: #58a6ff;
+  --green: #3fb950;
+  --orange: #d29922;
+  --purple: #bc8cff;
+  --cyan: #39c5cf;
+  --red: #f85149;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── Top Nav ── */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.top-nav::-webkit-scrollbar { display: none; }
+.nav-brand {
+  padding: 14px 20px 14px 0;
+  border-right: 1px solid var(--card-border);
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.nav-brand h1 { font-size: 15px; color: var(--accent); font-weight: 600; }
+.nav-brand p { font-size: 10px; color: var(--text-dim); margin-top: 1px; }
+
+.chapter-btn {
+  padding: 14px 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chapter-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); border-radius: 6px; }
+.chapter-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(247,129,102,0.08); }
+.chapter-btn .c-num { font-size: 9px; background: var(--card-border); padding: 1px 5px; border-radius: 4px; }
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.mastery-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+}
+.mastery-pill .bar { width: 60px; height: 4px; background: var(--card-border); border-radius: 2px; overflow: hidden; }
+.mastery-pill .fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); border-radius: 2px; transition: width 0.5s; }
+.mastery-pill .pct { color: var(--green); font-weight: 600; }
+
+/* ── Feedback Button ── */
+.feedback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.feedback-btn:hover {
+  background: var(--card-border);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Main ── */
+.report {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+/* ── Chapter ── */
+.chapter {
+  margin-bottom: 48px;
+  scroll-margin-top: 70px;
+}
+.chapter-num {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.chapter-title {
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chapter-title .icon { font-size: 20px; }
+.chapter-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+/* ── Metric Strip ── */
+.metric-strip {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.metric-pill {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  min-width: 120px;
+  flex: 1;
+}
+.metric-pill .lbl { font-size: 9.5px; color: var(--text-dim); margin-bottom: 3px; }
+.metric-pill .val { font-size: 20px; font-weight: bold; }
+.metric-pill .val.accent { color: var(--accent); }
+.metric-pill .val.blue { color: var(--blue); }
+.metric-pill .val.green { color: var(--green); }
+.metric-pill .val.orange { color: var(--orange); }
+.metric-pill .val.purple { color: var(--purple); }
+.metric-pill .val.red { color: var(--red); }
+.metric-pill .sub { font-size: 9.5px; margin-top: 2px; }
+.metric-pill .sub.red { color: var(--red); }
+.metric-pill .sub.green { color: var(--green); }
+
+/* ── Module Link Card ── */
+.module-link-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.module-link-card:hover {
+  border-color: var(--accent);
+  background: rgba(247,129,102,0.05);
+  transform: translateX(3px);
+}
+.module-link-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.module-link-body { flex: 1; }
+.module-link-body h4 { font-size: 13px; color: var(--text); margin-bottom: 2px; }
+.module-link-body p { font-size: 11px; color: var(--text-dim); }
+.module-link-arrow {
+  color: var(--accent);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.module-link-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.module-tag {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--card-border);
+  color: var(--text-dim);
+}
+
+/* ── Insight ── */
+.insight-box {
+  background: rgba(57,197,207,0.06);
+  border: 1px solid rgba(57,197,207,0.15);
+  border-left: 3px solid var(--cyan);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.75;
+  margin-top: 12px;
+}
+.insight-box.accent { border-left-color: var(--accent); background: rgba(247,129,102,0.05); }
+.insight-box.orange { border-left-color: var(--orange); background: rgba(210,153,34,0.05); }
+.insight-box.green { border-left-color: var(--green); background: rgba(63,185,80,0.05); }
+.insight-box.red { border-left-color: var(--red); background: rgba(248,81,73,0.05); }
+.insight-box .insight-label { font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+
+/* ── Mini Summary ── */
+.summary-text {
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.75;
+}
+.summary-text strong { color: var(--accent); }
+.summary-text em { color: var(--text-dim); font-style: normal; }
+
+/* ── Flow Diagram (compact) ── */
+.flow-diagram { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 8px 0; }
+.flow-node {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 7px;
+  padding: 7px 11px;
+  font-size: 11px;
+  text-align: center;
+  min-width: 65px;
+}
+.flow-node.hi { border-color: var(--accent); background: rgba(247,129,102,0.08); }
+.flow-node .n-title { font-weight: bold; font-size: 11.5px; }
+.flow-node .n-sub { font-size: 9px; color: var(--text-dim); }
+.flow-arrow { color: var(--text-dim); font-size: 13px; padding: 0 2px; }
+
+/* ── Divider ── */
+.chapter-divider { border: none; border-top: 1px solid var(--card-border); margin: 40px 0; }
+
+/* ── Progress Bar ── */
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+}
+.progress-wrap .label { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+.progress-track { flex: 1; height: 6px; background: var(--card-border); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); border-radius: 3px; transition: width 0.6s; }
+.progress-text { font-size: 12px; font-weight: bold; color: var(--green); min-width: 40px; text-align: right; }
+
+/* ── Feedback Panel ── */
+#feedback-panel { display: none; }
+#feedback-panel.open { display: block; }
+
+.feedback-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin-top: 48px;
+  overflow: hidden;
+}
+.feedback-panel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+.feedback-panel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.feedback-panel-header .fp-icon { font-size: 16px; }
+.feedback-panel-header .fp-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.feedback-panel-header .fp-sub { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+.fp-toggle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--card-border);
+  border: none;
+  color: var(--text-dim);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.fp-toggle:hover { background: var(--accent); color: #fff; }
+
+.feedback-panel-body { padding: 20px; }
+
+.fb-type-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.fb-type-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.fb-type-btn:hover { border-color: var(--accent); color: var(--accent); }
+.fb-type-btn.selected { border-color: var(--accent); color: var(--accent); background: rgba(247,129,102,0.1); }
+
+.fb-field { margin-bottom: 12px; }
+.fb-label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; display: block; }
+.fb-textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 14px;
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.fb-textarea:focus { border-color: var(--accent); }
+.fb-textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
+
+.fb-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+.fb-hint { font-size: 11px; color: var(--text-dim); }
+.fb-submit {
+  padding: 8px 20px;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.fb-submit:hover { opacity: 0.85; }
+.fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.fb-result {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  display: none;
+}
+.fb-result.success { display: block; background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); color: var(--green); }
+.fb-result.error { display: block; background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3); color: var(--red); }
+.fb-result.info { display: block; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3); color: var(--blue); }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .top-nav { padding: 0 14px; }
+  .nav-brand { padding-right: 12px; margin-right: 12px; }
+  .chapter-btn { padding: 12px 10px; font-size: 11px; }
+  .report { padding: 20px 14px 60px; }
+  .metric-strip { gap: 8px; }
+  .metric-pill { min-width: calc(50% - 6px); }
+  .module-link-card:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Top Navigation ── -->
+<nav class="top-nav">
+  <div class="nav-brand">
+    <h1>到家服务 · 知识图谱</h1>
+    <p>v3.1</p>
+  </div>
+  <button class="chapter-btn active" data-chap="overview" onclick="scrollToChapter('overview')">📋 总览</button>
+  <button class="chapter-btn" data-chap="c" onclick="scrollToChapter('c')"><span class="c-num">01</span> C端</button>
+  <button class="chapter-btn" data-chap="b" onclick="scrollToChapter('b')"><span class="c-num">02</span> B端</button>
+  <button class="chapter-btn" data-chap="nurse" onclick="scrollToChapter('nurse')"><span class="c-num">03</span> 护士端</button>
+  <button class="chapter-btn" data-chap="lab" onclick="scrollToChapter('lab')"><span class="c-num">04</span> 实验室</button>
+  <button class="chapter-btn" data-chap="ops" onclick="scrollToChapter('ops')"><span class="c-num">05</span> 运营端</button>
+  <button class="chapter-btn" data-chap="topic" onclick="scrollToChapter('topic')">🔍 专题</button>
+  <div class="nav-right">
+    <a href="#" id="feedback-btn" class="feedback-btn" onclick="openFeedback(); return false;">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      反馈问题
+    </a>
+  </div>
+</nav>
+
+<!-- ── Main Content ── -->
+<main class="report">
+
+  <!-- ══ OVERVIEW ══ -->
+  <section class="chapter" id="ch-overview">
+    <div class="chapter-num">总览</div>
+    <div class="chapter-title"><span class="icon">🏠</span> 业务全景</div>
+    <div class="chapter-sub">JD Health 到家服务业务部 · 两类业务模式 · 五端协同</div>
+
+    <div class="progress-wrap">
+      <span class="label">核心指标</span>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+      <span class="progress-text" id="prog-pct">—</span>
+    </div>
+
+    <div class="metric-strip">
+      <div class="metric-pill">
+        <div class="lbl">两类业务</div>
+        <div class="val accent">2</div>
+        <div class="sub">检测(两段履约) + 护理(一段履约)</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">五端协同</div>
+        <div class="val blue">5</div>
+        <div class="sub">C端·B端·护士端·实验室·运营端</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">已掌握</div>
+        <div class="val green" id="stat-done">0</div>
+        <div class="sub">共10个模块</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">检-医转化</div>
+        <div class="val red">18.88%</div>
+        <div class="sub red">目标50%</div>
+      </div>
+    </div>
+
+    <div class="summary-text">
+      到家服务围绕 <strong>检测</strong> 和 <strong>护理</strong> 两条业务线展开。检测业务由护士采样+运力配送+实验室三段协作完成，核心价值在报告产出和检医/检药转化；护理业务由护士独立完成一段履约，核心价值在专业性和时效性。五端（C端/B端/护士端/实验室/运营端）通过业务身份机制复用中台能力，实现差异化履约。
+    </div>
+
+    <div class="insight-box" style="margin-top:14px">
+      <div class="insight-label">核心洞察</div>
+      检测业务的两段履约（护士+实验室）是与外卖/护理业务的本质差异，报告页是转化关键节点。派单2.0的"以需定供"战略是当前最重要的系统性升级。
+    </div>
+
+    <div class="metric-strip" style="margin-top:14px">
+      <div class="metric-pill">
+        <div class="lbl">两段 vs 一段</div>
+        <div class="val purple">核心差异</div>
+        <div class="sub">实验室介入 vs 护士独立</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">报告转化</div>
+        <div class="val orange">关键节点</div>
+        <div class="sub">检-医18.88% / 检-药1.99%</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">战略方向</div>
+        <div class="val green">以需定供</div>
+        <div class="sub">派单2.0 · VIP识别 · AI渗透</div>
+      </div>
+    </div>
+
+    <!-- Module Links: Overview -->
+    <div style="margin-top:18px">
+      <a href="modules/到家服务业务全景.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(247,129,102,0.15);color:var(--accent)">📋</div>
+        <div class="module-link-body">
+          <h4>到家服务业务全景 · 详尽模块</h4>
+          <p>五端协同关系图 + 两类业务横向对比 + 关键指标体系</p>
+          <div class="module-link-meta">
+            <span class="module-tag">完整内容</span>
+            <span class="module-tag">关系图</span>
+            <span class="module-tag">指标体系</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="chapter-divider">
+
+  <!-- ══ C端 ══ -->
+  <section class="chapter" id="ch-c">
+    <div class="chapter-num">第一章 · 01</div>
+    <div class="chapter-title"><span class="icon">🏠</span> C端用户侧</div>
+    <div class="chapter-sub">用户入口 · 决策路径 · 六型用户 · 报告转化</div>
+
+    <div class="metric-strip">
+      <div class="metric-pill">
+        <div class="lbl">核心入口</div>
+        <div class="val blue">3</div>
+        <div class="sub">京东App/小程序/主站健康频道</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">决策路径</div>
+        <div class="val accent">5步</div>
+        <div class="sub">下单→履约→服务→报告→转化</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">报告类型</div>
+        <div class="val purple">2种</div>
+        <div class="sub">结构化报告 + 大为AI解读</div>
+      </div>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-node hi"><div class="n-title">下单</div><div class="n-sub">京东入口</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">履约</div><div class="n-sub">护士上门</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">服务</div><div class="n-sub">检测/护理</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">报告</div><div class="n-sub">大为解读</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">转化</div><div class="n-sub">问诊/用药</div></div>
+    </div>
+
+    <div class="summary-text" style="margin-top:12px">
+      C端是业务起点。检测用户经历"等待报告"环节，护理用户服务结束即完成。报告页是转化关键——<strong>检-医18.88%</strong>（目标50%）远高于<strong>检-药1.99%</strong>（目标3%），核心原因是用药决策成本高。六型用户中A型（急症焦虑）和E型（银发经济）是最需关注的群体。
+    </div>
+
+    <div class="insight-box orange">
+      <div class="insight-label">核心洞察</div>
+      检-药转化低的本质：用药是高决策成本行为，用户需要"为什么买"的推荐理由。检-医有免费问诊入口，决策门槛低。
+    </div>
+
+    <!-- Module Links: C端 -->
+    <div style="margin-top:14px">
+      <a href="modules/C端用户侧.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(247,129,102,0.15);color:var(--accent)">🏠</div>
+        <div class="module-link-body">
+          <h4>C端用户侧 · 详尽模块</h4>
+          <p>六型用户完整画像 · 报告页转化细节 · 入口切换规则 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">6张用户卡片</span>
+            <span class="module-tag">完整内容</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="chapter-divider">
+
+  <!-- ══ B端 ══ -->
+  <section class="chapter" id="ch-b">
+    <div class="chapter-num">第二章 · 02</div>
+    <div class="chapter-title"><span class="icon">🏢</span> B端生态</div>
+    <div class="chapter-sub">内侧消医专项 · 外侧医院合作</div>
+
+    <div class="metric-strip">
+      <div class="metric-pill">
+        <div class="lbl">检-医转化</div>
+        <div class="val red">18.88%</div>
+        <div class="sub red">目标 50%</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">检-药转化</div>
+        <div class="val orange">1.99%</div>
+        <div class="sub red">目标 3%</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">指标口径</div>
+        <div class="val blue" style="font-size:16px">24h内</div>
+        <div class="sub">问诊/用药点击</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">核心矛盾</div>
+        <div class="val purple">入口依赖</div>
+        <div class="sub">用户主动点 vs 100%触达</div>
+      </div>
+    </div>
+
+    <div class="summary-text">
+      B端分<strong>内侧</strong>（消医专项）和<strong>外侧</strong>（医院合作）两侧。内侧解决转化效率，核心KPI是检-医18.88%和检-药1.99%；外侧构建生态壁垒，HIS系统对接是医院合作的关键基础设施。
+    </div>
+
+    <div class="insight-box green">
+      <div class="insight-label">核心洞察</div>
+      消医专项是当前核心KPI，医院合作是长期战略方向。两者驱动的业务逻辑不同：前者优化存量转化，后者拓展增量生态。
+    </div>
+
+    <!-- Module Links: B端 -->
+    <div style="margin-top:14px">
+      <a href="modules/B端消医与医院.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(88,166,255,0.15);color:var(--blue)">🏢</div>
+        <div class="module-link-body">
+          <h4>B端生态 · 详尽模块</h4>
+          <p>消医专项完整指标分析 · 医院合作模式 · HIS对接细节 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">指标口径</span>
+            <span class="module-tag">完整内容</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="chapter-divider">
+
+  <!-- ══ 护士端 ══ -->
+  <section class="chapter" id="ch-nurse">
+    <div class="chapter-num">第三章 · 03</div>
+    <div class="chapter-title"><span class="icon">👩‍⚕️</span> 护士端全貌</div>
+    <div class="chapter-sub">6类角色 · 京东医生APP · 服务者管理</div>
+
+    <div class="metric-strip">
+      <div class="metric-pill">
+        <div class="lbl">服务角色</div>
+        <div class="val blue">6类</div>
+        <div class="sub">护士/康复师/到家医生/护理员/验配师/宠医</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">管理模式</div>
+        <div class="val orange">3层</div>
+        <div class="sub">全职/兼职/站长</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">痛点</div>
+        <div class="val red">3个</div>
+        <div class="sub">技术被动/需求积压/组织调整</div>
+      </div>
+    </div>
+
+    <div class="summary-text">
+      护士端是履约核心执行者。6类角色中<strong>护士</strong>（护理+检测）和<strong>康复师</strong>是主力。护理业务一段履约vs检测业务两段履约的差异在于：检测需护士提前呼叫运力配送样本。当前痛点是C端优先级更高导致服务者端优化经常积压。
+    </div>
+
+    <div class="insight-box red">
+      <div class="insight-label">核心洞察</div>
+      服务者端优化积压的本质：C端以用户单量为核心目标，技术依赖集团原生端发版节奏。长期看，服务者体验影响履约质量，进而影响C端留存。
+    </div>
+
+    <!-- Module Links: 护士端 -->
+    <div style="margin-top:14px">
+      <a href="modules/护士端全貌.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(63,185,80,0.15);color:var(--green)">👩‍⚕️</div>
+        <div class="module-link-body">
+          <h4>护士端全貌 · 详尽模块</h4>
+          <p>6类角色详解 · 护理vs检测流程对比 · 质量提升策略 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">完整内容</span>
+            <span class="module-tag">6类角色</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+      <a href="modules/护士派单策略.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(63,185,80,0.15);color:var(--green)">📡</div>
+        <div class="module-link-body">
+          <h4>护士派单策略体系 · 详尽模块</h4>
+          <p>派单2.0六轮机制 · 用户/服务者矩阵 · VIP识别 · AI渗透 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">专题模块</span>
+            <span class="module-tag">完整内容</span>
+            <span class="module-tag">自测题</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+      <a href="modules/服务者分层考核.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">🏆</div>
+        <div class="module-link-body">
+          <h4>服务者分层与考核 · 详尽模块</h4>
+          <p>三层分类体系 · 服务分体系 · 奖惩规则 · 两种评分机制对比 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">专题模块</span>
+            <span class="module-tag">完整内容</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+      <a href="modules/服务者结算域.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(63,185,80,0.15);color:var(--green)">💰</div>
+        <div class="module-link-body">
+          <h4>服务者结算域 · 详尽模块</h4>
+          <p>三层服务架构 · 核心算价公式 · 随单结算时点 · 保底工资 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">专题模块</span>
+            <span class="module-tag">完整内容</span>
+            <span class="module-tag green">一期进行中</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="chapter-divider">
+
+  <!-- ══ 实验室端 ══ -->
+  <section class="chapter" id="ch-lab">
+    <div class="chapter-num">第四章 · 04</div>
+    <div class="chapter-title"><span class="icon">🔬</span> 实验室端全貌</div>
+    <div class="chapter-sub">样本检测全流程 · 质控体系 · 产能管理</div>
+
+    <div class="metric-strip">
+      <div class="metric-pill">
+        <div class="lbl">检测流程</div>
+        <div class="val purple">4步</div>
+        <div class="sub">收样→上机→审核→上传</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">关键瓶颈</div>
+        <div class="val red">运力</div>
+        <div class="sub">运力不足导致护士等待</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">协同节点</div>
+        <div class="val orange">采样即呼叫</div>
+        <div class="sub">提前呼叫运力避免等待</div>
+      </div>
+    </div>
+
+    <div class="summary-text">
+      实验室是检测业务的核心交付节点。四步流程（收样→上机→报告审核→上传）中，<strong>与护士端的协同关键节点</strong>是"采样后立即呼叫运力"。最容易成为瓶颈的是运力配送——运力不足时护士需等待样本被取走，影响接单效率。
+    </div>
+
+    <div class="insight-box" style="--hi-color:var(--purple)">
+      <div class="insight-label">核心洞察</div>
+      运力配送是检测业务两段履约的衔接点。预测样本量 → 动态调整运力储备 → 减少护士等待时间，是提升检测业务整体效率的关键优化方向。
+    </div>
+
+    <!-- Module Links: 实验室 -->
+    <div style="margin-top:14px">
+      <a href="modules/实验室端.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(188,140,255,0.15);color:var(--purple)">🔬</div>
+        <div class="module-link-body">
+          <h4>实验室端全貌 · 详尽模块</h4>
+          <p>检测全流程详解 · 四大角色职责 · 护士端协同节点 · 质控体系 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">完整内容</span>
+            <span class="module-tag">完整流程</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="chapter-divider">
+
+  <!-- ══ 运营端 ══ -->
+  <section class="chapter" id="ch-ops">
+    <div class="chapter-num">第五章 · 05</div>
+    <div class="chapter-title"><span class="icon">⚙️</span> 运营端全貌</div>
+    <div class="chapter-sub">配置管理 · 四大产品域 · 业务身份机制</div>
+
+    <div class="metric-strip">
+      <div class="metric-pill">
+        <div class="lbl">四大产品域</div>
+        <div class="val accent">4</div>
+        <div class="sub">商品·履约·结算·数据</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">核心机制</div>
+        <div class="val orange">业务身份</div>
+        <div class="sub">中台能力"开关"</div>
+      </div>
+      <div class="metric-pill">
+        <div class="lbl">中台复用</div>
+        <div class="val blue">登录/价格/LBS</div>
+        <div class="sub">等共性需求统一封装</div>
+      </div>
+    </div>
+
+    <div class="summary-text">
+      运营端通过<strong>业务身份机制</strong>控制中台能力在不同场景的差异化表现。四大产品域：<strong>商品域</strong>（SKU/项目/指标三层）、<strong>履约域</strong>（地址围栏/服务站/运力调度）、<strong>结算域</strong>（差异化定价）、<strong>数据域</strong>（业务看板/质控预警）。
+    </div>
+
+    <div class="insight-box orange">
+      <div class="insight-label">核心洞察</div>
+      业务身份是中台能力的"开关"。C端交易和互医开单的履约流程、报告样式、问诊入口差异，都通过业务身份来区分和控制，而非新建系统。
+    </div>
+
+    <!-- Module Links: 运营端 -->
+    <div style="margin-top:14px">
+      <a href="modules/运营端全貌.html" target="_blank" class="module-link-card">
+        <div class="module-link-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">⚙️</div>
+        <div class="module-link-body">
+          <h4>运营端全貌 · 详尽模块</h4>
+          <p>四大产品域详解 · 业务身份机制 · 中台能力复用 · 自测题</p>
+          <div class="module-link-meta">
+            <span class="module-tag">完整内容</span>
+            <span class="module-tag">四大产品域</span>
+          </div>
+        </div>
+        <span class="module-link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="chapter-divider">
+
+  <!-- ══ 专题深度 ══ -->
+  <section class="chapter" id="ch-topic">
+    <div class="chapter-num">专题 · 深度</div>
+    <div class="chapter-title"><span class="icon">🔍</span> 专题深度</div>
+    <div class="chapter-sub">派单策略 · 服务者考核 · 竞品对标 · 新增内容在此沉淀</div>
+
+    <div class="summary-text" style="margin-bottom:16px">
+      新消化的专题内容在此沉淀为独立模块。已掌握的专题会从"在学"升级为"已掌握"状态。每个专题模块包含：核心框架 + 详细分析 + 自测题 + 掌握度追踪。
+    </div>
+
+    <!-- Module Links: 专题 -->
+    <a href="modules/护士派单策略.html" target="_blank" class="module-link-card">
+      <div class="module-link-icon" style="background:rgba(63,185,80,0.15);color:var(--green)">📡</div>
+      <div class="module-link-body">
+        <h4>护士派单策略体系 · 专题模块</h4>
+        <p>派单2.0六轮机制 · 从以供定需到以需定供 · 用户/服务者类型矩阵 · VIP识别 · AI渗透 · 自测题</p>
+        <div class="module-link-meta">
+          <span class="module-tag">派单2.0</span>
+          <span class="module-tag">六轮机制</span>
+          <span class="module-tag">战略转型</span>
+          <span class="module-tag">自测题</span>
+        </div>
+      </div>
+      <span class="module-link-arrow">→</span>
+    </a>
+
+    <a href="modules/服务者分层考核.html" target="_blank" class="module-link-card">
+      <div class="module-link-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">🏆</div>
+      <div class="module-link-body">
+        <h4>服务者分层与考核机制 · 专题模块</h4>
+        <p>三层分类体系 · 服务分体系 · SABC层级 · 两种评分机制对比 · 结算倾斜 · 自测题</p>
+        <div class="module-link-meta">
+          <span class="module-tag">护士分层</span>
+          <span class="module-tag">服务分</span>
+          <span class="module-tag">考核体系</span>
+          <span class="module-tag">自测题</span>
+        </div>
+      </div>
+      <span class="module-link-arrow">→</span>
+    </a>
+
+    <a href="modules/美团映射对标.html" target="_blank" class="module-link-card">
+      <div class="module-link-icon" style="background:rgba(188,140,255,0.15);color:var(--purple)">🔍</div>
+      <div class="module-link-body">
+        <h4>美团配送技术-到家映射 · 专题模块</h4>
+        <p>超级大脑 · ETA预估 · 三大核心差距分析 · 到家两段履约特殊性 · 自测题</p>
+        <div class="module-link-meta">
+          <span class="module-tag">竞品对标</span>
+          <span class="module-tag">三大差距</span>
+          <span class="module-tag">自测题</span>
+        </div>
+      </div>
+      <span class="module-link-arrow">→</span>
+    </a>
+
+    <a href="modules/到家快检平台PRD消化.html" target="_blank" class="module-link-card">
+      <div class="module-link-icon" style="background:rgba(247,129,102,0.15);color:var(--accent)">📄</div>
+      <div class="module-link-body">
+        <h4>到家快检及上门服务平台 PRD · 专题模块</h4>
+        <p>C端/护士端/运营端三大模块剖析 · 全局串联 · 6大风险点识别 · 自测题</p>
+        <div class="module-link-meta">
+          <span class="module-tag">PRD消化</span>
+          <span class="module-tag">三大模块</span>
+          <span class="module-tag">风险分析</span>
+          <span class="module-tag">自测题</span>
+        </div>
+      </div>
+      <span class="module-link-arrow">→</span>
+    </a>
+  </section>
+
+  <!-- ── Feedback Panel ── -->
+  <div id="feedback-panel" class="feedback-panel">
+    <div class="feedback-panel-header" onclick="toggleFeedback()">
+      <div class="feedback-panel-header-left">
+        <span class="fp-icon">💬</span>
+        <div>
+          <div class="fp-title">团队共创 · 反馈与建议</div>
+          <div class="fp-sub">帮助完善这份知识图谱 · 提交后直接发送给你</div>
+        </div>
+      </div>
+      <button class="fp-toggle" id="fp-toggle-btn">+</button>
+    </div>
+    <div class="feedback-panel-body" id="fp-body" style="display:none">
+      <div class="fb-type-row" id="fb-type-row">
+        <button class="fb-type-btn" data-type="错误报告" onclick="selectFbType(this)">🚦 错误报告</button>
+        <button class="fb-type-btn" data-type="内容建议" onclick="selectFbType(this)">📕 内容建议</button>
+        <button class="fb-type-btn" data-type="新功能提议" onclick="selectFbType(this)">🏣 新功能提议</button>
+        <button class="fb-type-btn" data-type="讨论交流" onclick="selectFbType(this)">💡 讨论交流</button>
+      </div>
+      <div class="fb-field">
+        <label class="fb-label">具体内容</label>
+        <textarea class="fb-textarea" id="fb-text" placeholder="请描述您的反馈内容..."></textarea>
+      </div>
+      <div class="fb-submit-row">
+        <span class="fb-hint" id="fb-hint">选择一个类型，填写内容后提交</span>
+        <button class="fb-submit" id="fb-submit" onclick="submitFeedback()">提交反馈</button>
+      </div>
+      <div class="fb-result" id="fb-result"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── Feedback System ──
+let selectedFbType = '';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkokvpkn';
+
+function openFeedback() {
+  const panel = document.getElementById('feedback-panel');
+  panel.classList.add('open');
+  document.getElementById('fp-body').style.display = 'block';
+  document.getElementById('fp-toggle-btn').textContent = '×';
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function toggleFeedback() {
+  const panel = document.getElementById('feedback-panel');
+  const body = document.getElementById('fp-body');
+  const btn = document.getElementById('fp-toggle-btn');
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    body.style.display = 'none';
+    btn.textContent = '+';
+  } else {
+    panel.classList.add('open');
+    body.style.display = 'block';
+    btn.textContent = '×';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function selectFbType(btn) {
+  document.querySelectorAll('.fb-type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedFbType = btn.dataset.type;
+  updateFbHint();
+}
+
+function updateFbHint() {
+  const hint = document.getElementById('fb-hint');
+  if (!selectedFbType) {
+    hint.textContent = '选择一个类型，填写内容后提交';
+  } else {
+    hint.textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
+  }
+}
+
+async function submitFeedback() {
+    const fbType = document.getElementById('fb-type').value;
+    const fbText = document.getElementById('fb-text').value;
+    const moduleEl = document.getElementById('fb-module');
+    const moduleName = moduleEl ? moduleEl.value : 'index';
+
+    if (!fbText.trim()) {
+        alert('请输入反馈内容');
+        return;
+    }
+
+    fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+            '类型': fbType,
+            '模块': moduleName,
+            '页面': window.location.href,
+            '反馈内容': fbText
+        })
+    })
+    .then(r => r.ok ? showFeedbackSuccess() : Promise.reject())
+    .then(() => document.getElementById('feedback-form').reset())
+    .catch(() => alert('提交失败，请重试'));
+}
+
+// ── Public Hub Initialization ──
+function initPublicHub() {
+  document.getElementById('prog-fill').style.width = '100%';
+  document.getElementById('prog-pct').textContent = '10';
+  document.getElementById('stat-done').textContent = '10';
+}
+
+let skipObserver = false;
+
+function scrollToChapter(id) {
+  skipObserver = true;
+  document.querySelectorAll('.chapter-btn').forEach(b => b.classList.toggle('active', b.dataset.chap === id));
+  const target = document.getElementById('ch-' + id);
+  if (target) {
+    const top = target.offsetTop - 80;
+    document.documentElement.scrollTop = top;
+  }
+  setTimeout(() => { skipObserver = false; }, 800);
+}
+
+const observer = new IntersectionObserver((entries) => {
+  if (skipObserver) return;
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id.replace('ch-', '');
+      document.querySelectorAll('.chapter-btn').forEach(b => b.classList.toggle('active', b.dataset.chap === id));
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+document.querySelectorAll('.chapter').forEach(ch => observer.observe(ch));
+
+document.addEventListener('DOMContentLoaded', () => {
+  initPublicHub();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# GitHub Pages deployment repository
+# Only HTML files are deployed
+
+# Exclude everything by default
+*
+
+# Re-include HTML files only
+!*.html
+!modules/
+!modules/*.html
+
+# System files
+.DS_Store
+Thumbs.db
