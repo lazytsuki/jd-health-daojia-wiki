@@ -35,10 +35,6 @@ body {
 .meta-tag { font-size: 10px; padding: 3px 10px; border-radius: 8px; background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--card-border); }
 .meta-tag.green { background: rgba(63,185,80,0.1); color: var(--green); border-color: rgba(63,185,80,0.2); }
 
-
-
-
-
 .content { max-width: 820px; padding: 0 24px 60px; }
 .section { margin-bottom: 28px; }
 .section-title {
@@ -83,8 +79,6 @@ body {
 .card-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
 .card.open .card-body { max-height: 5000px; }
 .card-body-in { padding: 0 16px 16px; }
-
-
 .insight-box { background: rgba(57,197,207,0.06); border: 1px solid rgba(57,197,207,0.15); border-left: 3px solid var(--cyan); border-radius: 8px; padding: 10px 16px; font-size: 12px; color: var(--text); line-height: 1.75; margin-top: 12px; }
 .insight-box.green { border-left-color: var(--green); background: rgba(63,185,80,0.05); }
 .insight-box.orange { border-left-color: var(--orange); background: rgba(210,153,34,0.05); }
@@ -175,7 +169,18 @@ body {
   <div class="hero-meta"><span class="meta-tag">结算域</span><span class="meta-tag">护士端</span><span class="meta-tag">运营端</span><span class="meta-tag">算价服务</span><span class="meta-tag green">一期进行中</span></div>
 </div>
 
-<ul class="text-list" style="margin-top:10px">
+<div class="content">
+
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--green)"></span> 一、三层服务架构</div>
+    <div class="flow-diagram">
+      <div class="flow-node hi"><div class="n-title">算价服务</div><div class="n-sub">规则配置+派单加价</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">派单服务</div><div class="n-sub">承接算价，策略派单</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">结算服务</div><div class="n-sub">履约后触发，与互医交互</div></div>
+    </div>
+    <ul class="text-list" style="margin-top:10px">
       <li>核心升级：<strong>算价服务不再依赖C端结果</strong>，直接读取护士结算配置规则，实现BC解耦</li>
       <li>适用范围：所有护士检测/护理的履约单，包括200号单、4号单、外部无订单等</li>
       <li>触发时机：用户/外部接口下单，<strong>派单前</strong>即完成算价</li>
@@ -317,29 +322,48 @@ else:<br>
   <hr class="divider">
 
   <div class="section">
-    
+    <div class="section-title"><span class="dot" style="background:var(--green)"></span> 九、自测题</div>
 
     <div class="card open">
-      
-      <div class="card-body"><div class="card-body-in">
-        </div></div>
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">❯</div>
+        <div class="card-meta">
+          <h3>Q：保底工资的触发条件是什么？为什么设置这两个条件（90%履约率 or 150单）？</h3>
+          <p></p>
+        </div>
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div></div>
     </div>
 
     <div class="card open">
-      
-      <div class="card-body"><div class="card-body-in">
-        </div></div>
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(63,185,80,0.15);color:var(--green)">❯</div>
+        <div class="card-meta">
+          <h3>Q：为什么"平台补贴"在"开始服务"时就开始结算，而平台服务费要等"服务完成"？</h3>
+          <p></p>
+        </div>
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div></div>
     </div>
 
     <div class="card open">
-      
-      <div class="card-body"><div class="card-body-in">
-        </div></div>
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(247,129,102,0.15);color:var(--accent)">❯</div>
+        <div class="card-meta">
+          <h3>Q：BC解耦是什么意思？为什么重要？</h3>
+          <p></p>
+        </div>
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div></div>
     </div>
   </div>
 
   <div class="insight-box green">
-    </div>
+    <strong>：</strong>能说清三层架构 → 默写核心公式 → 解释保底工资触发条件 → 说明随单结算时点逻辑。
+  </div>
 
 </div>
 
@@ -349,95 +373,61 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
   const done = Object.values(mastered).filter(Boolean).length;
 async function submitFeedback() {
-    var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
-    var fbText = document.getElementById('fb-text') ? document.getElementById('fb-text').value : '';
-    var moduleEl = document.getElementById('fb-module');
-    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : 'index';
+    const fbType = document.getElementById('fb-type').value;
+    const fbText = document.getElementById('fb-text').value;
+    const moduleEl = document.getElementById('fb-module');
+    const moduleName = moduleEl ? moduleEl.value : 'index';
 
-    if (!fbText || !fbText.trim()) {
-        var hint = document.getElementById('fb-hint');
-        if (hint) { hint.textContent = '请输入反馈内容'; hint.style.color = '#e53e3e'; }
+    if (!fbText.trim()) {
+        alert('请输入反馈内容');
         return;
     }
 
-    var submitBtn = document.getElementById('fb-submit');
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中...'; }
-
-    try {
-        var res = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-                '类型': fbType,
-                '模块': moduleName,
-                '页面': window.location.href,
-                '反馈内容': fbText
-            })
-        });
-
-        if (res.ok) {
-            console.log('Feedback submitted successfully');
-            showFeedbackSuccess();
-        } else {
-            var errText = '提交失败 (HTTP ' + res.status + ')';
-            console.error(errText);
-            var hint = document.getElementById('fb-hint');
-            if (hint) { hint.textContent = errText; hint.style.color = '#e53e3e'; }
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
-        }
-    } catch(e) {
-        console.error('Feedback submission error:', e);
-        var hint = document.getElementById('fb-hint');
-        if (hint) { hint.textContent = '网络错误，请检查网络后重试'; hint.style.color = '#e53e3e'; }
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
-    }
-}
-
-function showFeedbackSuccess() {
-    var result = document.getElementById('fb-result');
-    if (!result) return;
-    result.style.display = 'block';
-    var form = document.getElementById('feedback-form');
-    if (form) form.style.display = 'none';
-    var hint = document.getElementById('fb-hint');
-    if (hint) hint.style.display = 'none';
-    var submitBtn = document.getElementById('fb-submit');
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '已提交'; }
+    fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+            '类型': fbType,
+            '模块': moduleName,
+            '页面': window.location.href,
+            '反馈内容': fbText
+        })
+    })
+    .then(r => r.ok ? showFeedbackSuccess() : Promise.reject())
+    .then(() => document.getElementById('feedback-form').reset())
+    .catch(() => alert('提交失败，请重试'));
 }
 
 </script>
 
+
 <div id="feedback-panel" class="feedback-panel">
     <div class="feedback-panel-header" onclick="toggleFeedback()">
-      <div class="feedback-panel-header-left">
-        <span class="fp-icon">💬</span>
-        <div>
-          <div class="fp-title">团队共创 · 反馈与建议</div>
-          <div class="fp-sub"></div>
+        <div class="feedback-panel-header-left">
+            <span class="fp-icon">💬</span>
+            <div>
+                <div class="fp-title">反馈问题</div>
+                <div class="fp-sub">帮助我们持续改进</div>
+            </div>
         </div>
-      </div>
-      <button class="fp-toggle" id="fp-toggle-btn">+</button>
+        <div id="fp-toggle-btn" class="fp-toggle-btn">+</div>
     </div>
-    <div class="feedback-panel-body" id="fp-body" style="display:none">
-      <div class="fb-type-row" id="fb-type-row">
-        <button class="fb-type-btn" data-type="错误报告" onclick="selectFbType(this)">🚦 错误报告</button>
-        <button class="fb-type-btn" data-type="内容建议" onclick="selectFbType(this)">📕 内容建议</button>
-        <button class="fb-type-btn" data-type="新功能提议" onclick="selectFbType(this)">🏣 新功能提议</button>
-        <button class="fb-type-btn" data-type="讨论交流" onclick="selectFbType(this)">💡 讨论交流</button>
-      </div>
-      <div class="fb-field">
-        <label class="fb-label">具体内容</label>
-        <textarea class="fb-textarea" id="fb-text" placeholder="请描述您的反馈内容..."></textarea>
-      </div>
-      <div class="fb-submit-row">
-        <span class="fb-hint" id="fb-hint">选择一个类型，填写内容后提交</span>
-        <button class="fb-submit" id="fb-submit" onclick="submitFeedback()">提交反馈</button>
-      </div>
-      <div class="fb-result" id="fb-result"></div>
+    <div id="fp-body" class="feedback-panel-body" style="display:none">
+        <div class="fb-type-row">
+            <button class="fb-type-btn" data-type="内容有误" onclick="selectFbType(this)">内容有误</button>
+            <button class="fb-type-btn" data-type="缺少内容" onclick="selectFbType(this)">缺少内容</button>
+            <button class="fb-type-btn" data-type="理解困难" onclick="selectFbType(this)">理解困难</button>
+            <button class="fb-type-btn" data-type="其他" onclick="selectFbType(this)">其他</button>
+        </div>
+        <textarea id="fb-text" class="fb-textarea" placeholder="请描述您的问题或建议..."></textarea>
+        <input type="hidden" id="fb-module" value="服务者结算域">
+        <div class="fb-submit-row">
+            <span id="fb-hint" class="fb-hint">选择类型并填写内容后提交</span>
+            <button id="fb-submit" class="fb-submit" onclick="submitFeedback()">提交反馈</button>
+        </div>
+        <div id="fb-result" class="fb-result"></div>
     </div>
-  </div>
-
-</main>
+</div>
 
 </body>
 </html>

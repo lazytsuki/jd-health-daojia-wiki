@@ -35,10 +35,6 @@ body {
 .meta-tag { font-size: 10px; padding: 3px 10px; border-radius: 8px; background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--card-border); }
 .meta-tag.green { background: rgba(63,185,80,0.1); color: var(--green); border-color: rgba(63,185,80,0.2); }
 
-
-
-
-
 .content { max-width: 820px; padding: 0 24px 60px; }
 .section { margin-bottom: 28px; }
 .section-title {
@@ -82,10 +78,6 @@ body {
 .hi-box.o { background: rgba(210,153,34,0.08); border-color: rgba(210,153,34,0.2); color: var(--orange); }
 .hi-box.g { background: rgba(63,185,80,0.08); border-color: rgba(63,185,80,0.2); color: var(--green); }
 .hi-box.accent { background: rgba(247,129,102,0.08); border-color: rgba(247,129,102,0.2); color: var(--accent); }
-
-
-
-
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .col-card { background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 14px; }
 .col-card h5 { font-size: 11.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
@@ -194,8 +186,62 @@ body {
   <div class="hero-meta"><span class="meta-tag">B端</span><span class="meta-tag">消医专项</span><span class="meta-tag">医院合作</span><span class="meta-tag">指标体系</span><span class="meta-tag">核心KPI</span></div>
 </div>
 
-<div class="insight-box green">
+<div class="content">
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--blue)"></span> 一、B端双侧模式</div>
+  </div>
+  <div class="two-col">
+    <div class="col-card">
+      <h5 class="in">◀ 内侧 · 消医专项</h5>
+      <ul>
+        <li>检-医转化率 18.88%（目标50%）</li>
+        <li>检-药转化率 1.99%（目标3%）</li>
+        <li>指标口径：报告生成后24h内问诊/用药点击</li>
+        <li>分母：互医检验单/次卡/C端渠道产出报告用户</li>
+        <li>核心矛盾：入口依赖（用户主动点）vs 100%触达</li>
+      </ul>
     </div>
+    <div class="col-card">
+      <h5 class="out">▶ 外侧 · 医院合作</h5>
+      <ul>
+        <li>医院接入到家服务平台</li>
+        <li>HIS系统对接，订单自动流转</li>
+        <li>医院作为样本供给方（部分场景）</li>
+        <li>双向转诊/挂号合作（未来方向）</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--red)"></span> 二、为什么检-药转化率(1.99%)远低于检-医(18.88%)？</div>
+    <ul class="text-list">
+      <li>用药是高决策成本行为，用户需要"为什么买"的推荐理由</li>
+      <li>检-医有明确的问诊入口和免费权益，决策门槛低</li>
+      <li>检-药还受限于覆盖范围（仅呼吸道阳性）和商业化干扰</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--orange)"></span> 三、自测题</div>
+
+    <div class="card open">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">❯</div>
+        <div class="card-meta">
+          <h3>Q：为什么检-药转化率远低于检-医？</h3>
+          <p></p>
+        </div>
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div></div>
+
+  <div class="insight-box green">
+    <strong>：</strong>能说清B端双侧模式的差异 + 解释检-药&lt;检-医的核心原因 + 理解消医专项作为当前KPI的战略意义。
+  </div>
 
 </div>
 
@@ -208,118 +254,119 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkokvpkn';
 const MODULE_NAME = 'B端消医与医院';
 
 function toggleFeedback() {
-  var panel = document.getElementById('feedback-panel');
-  var body = document.getElementById('fp-body');
-  var btn = document.getElementById('fp-toggle-btn');
-  if (panel.classList.contains('open')) {
-    panel.classList.remove('open');
-    body.style.display = 'none';
-    btn.textContent = '+';
-  } else {
-    panel.classList.add('open');
-    body.style.display = 'block';
-    btn.textContent = '×';
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+    var panel = document.getElementById('feedback-panel');
+    var body = document.getElementById('fp-body');
+    var btn = document.getElementById('fp-toggle-btn');
+    if (panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        body.style.display = 'none';
+        btn.textContent = '+';
+    } else {
+        panel.classList.add('open');
+        body.style.display = 'block';
+        btn.textContent = '×';
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 function selectFbType(btn) {
-  document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
-  btn.classList.add('selected');
-  selectedFbType = btn.dataset.type;
-  document.getElementById('fb-hint').textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
+    document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    selectedFbType = btn.dataset.type;
+    var hint = document.getElementById('fb-hint');
+    if (hint) hint.textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
 }
 
 async function submitFeedback() {
-    var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
     var fbText = document.getElementById('fb-text') ? document.getElementById('fb-text').value : '';
     var moduleEl = document.getElementById('fb-module');
-    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : 'index';
-
-    if (!fbText || !fbText.trim()) {
-        var hint = document.getElementById('fb-hint');
-        if (hint) { hint.textContent = '请输入反馈内容'; hint.style.color = '#e53e3e'; }
+    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : MODULE_NAME;
+    if (!fbText.trim()) {
+        var result = document.getElementById('fb-result');
+        if (result) {
+            result.className = 'fb-result error';
+            result.textContent = '请填写反馈内容';
+            result.style.display = 'block';
+        }
         return;
     }
-
     var submitBtn = document.getElementById('fb-submit');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中...'; }
-
     try {
-        var res = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-                '类型': fbType,
-                '模块': moduleName,
-                '页面': window.location.href,
-                '反馈内容': fbText
-            })
-        });
-
-        if (res.ok) {
-            console.log('Feedback submitted successfully');
-            showFeedbackSuccess();
-        } else {
-            var errText = '提交失败 (HTTP ' + res.status + ')';
-            console.error(errText);
-            var hint = document.getElementById('fb-hint');
-            if (hint) { hint.textContent = errText; hint.style.color = '#e53e3e'; }
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+        var formData = new FormData();
+        formData.append('反馈类型', selectedFbType || '其他');
+        formData.append('模块', moduleName);
+        formData.append('反馈内容', fbText);
+        formData.append('页面', window.location.href);
+        var r = await fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+        if (!r.ok) throw new Error('network error');
+        showFeedbackSuccess();
+        var textEl = document.getElementById('fb-text');
+        if (textEl) textEl.value = '';
+        selectedFbType = '';
+        document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
+    } catch (e) {
+        var result = document.getElementById('fb-result');
+        if (result) {
+            result.className = 'fb-result error';
+            result.textContent = '提交失败，请重试或联系管理员';
+            result.style.display = 'block';
         }
-    } catch(e) {
-        console.error('Feedback submission error:', e);
-        var hint = document.getElementById('fb-hint');
-        if (hint) { hint.textContent = '网络错误，请检查网络后重试'; hint.style.color = '#e53e3e'; }
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+    } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '提交反馈'; }
     }
 }
 
 function showFeedbackSuccess() {
     var result = document.getElementById('fb-result');
-    if (!result) return;
-    result.style.display = 'block';
-    var form = document.getElementById('feedback-form');
-    if (form) form.style.display = 'none';
-    var hint = document.getElementById('fb-hint');
-    if (hint) hint.style.display = 'none';
-    var submitBtn = document.getElementById('fb-submit');
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '已提交'; }
+    if (result) {
+        result.className = 'fb-result success';
+        result.textContent = '感谢您的反馈！团队会认真阅读并尽快处理。';
+        result.style.display = 'block';
+    }
+    setTimeout(function() {
+        var panel = document.getElementById('feedback-panel');
+        var body = document.getElementById('fp-body');
+        if (panel && body) {
+            panel.classList.remove('open');
+            body.style.display = 'none';
+        }
+        var btn = document.getElementById('fp-toggle-btn');
+        if (btn) btn.textContent = '+';
+        if (result) result.style.display = 'none';
+    }, 2500);
 }
 
 </script>
 
+
 <div id="feedback-panel" class="feedback-panel">
     <div class="feedback-panel-header" onclick="toggleFeedback()">
-      <div class="feedback-panel-header-left">
-        <span class="fp-icon">💬</span>
-        <div>
-          <div class="fp-title">团队共创 · 反馈与建议</div>
-          <div class="fp-sub"></div>
+        <div class="feedback-panel-header-left">
+            <span class="fp-icon">💬</span>
+            <div>
+                <div class="fp-title">反馈问题</div>
+                <div class="fp-sub">帮助我们持续改进</div>
+            </div>
         </div>
-      </div>
-      <button class="fp-toggle" id="fp-toggle-btn">+</button>
+        <div id="fp-toggle-btn" class="fp-toggle-btn">+</div>
     </div>
-    <div class="feedback-panel-body" id="fp-body" style="display:none">
-      <div class="fb-type-row" id="fb-type-row">
-        <button class="fb-type-btn" data-type="错误报告" onclick="selectFbType(this)">🚦 错误报告</button>
-        <button class="fb-type-btn" data-type="内容建议" onclick="selectFbType(this)">📕 内容建议</button>
-        <button class="fb-type-btn" data-type="新功能提议" onclick="selectFbType(this)">🏣 新功能提议</button>
-        <button class="fb-type-btn" data-type="讨论交流" onclick="selectFbType(this)">💡 讨论交流</button>
-      </div>
-      <div class="fb-field">
-        <label class="fb-label">具体内容</label>
-        <textarea class="fb-textarea" id="fb-text" placeholder="请描述您的反馈内容..."></textarea>
-      </div>
-      <div class="fb-submit-row">
-        <span class="fb-hint" id="fb-hint">选择一个类型，填写内容后提交</span>
-        <button class="fb-submit" id="fb-submit" onclick="submitFeedback()">提交反馈</button>
-      </div>
-      <div class="fb-result" id="fb-result"></div>
+    <div id="fp-body" class="feedback-panel-body" style="display:none">
+        <div class="fb-type-row">
+            <button class="fb-type-btn" data-type="内容有误" onclick="selectFbType(this)">内容有误</button>
+            <button class="fb-type-btn" data-type="缺少内容" onclick="selectFbType(this)">缺少内容</button>
+            <button class="fb-type-btn" data-type="理解困难" onclick="selectFbType(this)">理解困难</button>
+            <button class="fb-type-btn" data-type="其他" onclick="selectFbType(this)">其他</button>
+        </div>
+        <textarea id="fb-text" class="fb-textarea" placeholder="请描述您的问题或建议..."></textarea>
+        <input type="hidden" id="fb-module" value="B端消医与医院">
+        <div class="fb-submit-row">
+            <span id="fb-hint" class="fb-hint">选择类型并填写内容后提交</span>
+            <button id="fb-submit" class="fb-submit" onclick="submitFeedback()">提交反馈</button>
+        </div>
+        <div id="fb-result" class="fb-result"></div>
     </div>
-  </div>
-
-</main>
+</div>
 
 </body>
 </html>

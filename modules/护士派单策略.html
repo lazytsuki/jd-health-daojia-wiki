@@ -110,6 +110,7 @@ body {
 .hi-box.g { background: rgba(63,185,80,0.08); border-color: rgba(63,185,80,0.2); color: var(--green); }
 .hi-box.accent { background: rgba(247,129,102,0.08); border-color: rgba(247,129,102,0.2); color: var(--accent); }
 
+
 /* Factor table */
 .factor-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
 .factor-table th { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--card-border); }
@@ -213,7 +214,25 @@ body {
   </div>
 </div>
 
-<ul class="text-list" style="margin-top:10px">
+<div class="content">
+
+  <!-- 1. 派单2.0六轮体系 -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--green)"></span> 一、派单2.0六轮体系</div>
+    <div class="flow-diagram">
+      <div class="flow-node"><div class="n-title">意向轮</div><div class="n-sub">专属护士</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">派单轮</div><div class="n-sub">全职优先</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">小队抢单</div><div class="n-sub">小队内</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">兜底轮</div><div class="n-sub">站长接单</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">全局抢单</div><div class="n-sub">全城</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">扩展抢单</div><div class="n-sub">+j公里</div></div>
+    </div>
+    <ul class="text-list" style="margin-top:10px">
       <li><strong>意向轮</strong>：用户指定专属护士（如家庭护士），优先派给该护士，建立信任关系</li>
       <li><strong>派单轮</strong>：系统根据全职护士排班和围栏自动派单，全职优先，效率最高</li>
       <li><strong>小队抢单</strong>：小组内护士竞争优质订单，激发服务者积极性</li>
@@ -350,27 +369,46 @@ body {
 
   <hr class="divider">
 
-  <!-- 7. 延伸阅读 -->
+  <!-- 7. 自测 -->
   <div class="section">
-    
+    <div class="section-title"><span class="dot" style="background:var(--orange)"></span> 七、自测题</div>
 
     <div class="card open">
-      
-      <div class="card-body"><div class="card-body-in">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">❯</div>
+        <div class="card-meta">
+          <h3>Q1：为什么"以供定需"向"以需定供"的转变是战略性的？</h3>
+          <p></p>
         </div>
-
-    <div class="card open">
-      
-      <div class="card-body"><div class="card-body-in">
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div><div class="card open">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">❯</div>
+        <div class="card-meta">
+          <h3>Q2：派单2.0的"六轮"顺序是什么？哪一轮保证了履约率底线？</h3>
+          <p></p>
         </div>
-
-    <div class="card open">
-      
-      <div class="card-body"><div class="card-body-in">
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div><div class="card open">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(210,153,34,0.15);color:var(--orange)">❯</div>
+        <div class="card-meta">
+          <h3>Q3：A型用户（急症焦虑型）和B型用户（刚需羊毛型）在派单策略上的核心差异是什么？</h3>
+          <p></p>
         </div>
-  </div>
+        <div class="card-arr">▾</div>
+      </div>
+      <div class="card-body"><div class="card-body-in"></div></div>
 
   <hr class="divider">
+
+  
+  <div class="hi-box accent">
+    <strong>：</strong>能完整复述六轮派单机制 + 解释"以供定需"到"以需定供"的本质差异 + 匹配用户类型与派单策略。
+  </div>
+
 </div>
 
 <script>
@@ -379,120 +417,121 @@ body {
 // ── Feedback System ──
 let selectedFbType = '';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkokvpkn';
-const MODULE_NAME = '护士派单策略';
+const MODULE_NAME = '护士派单策略体系';
 
 function toggleFeedback() {
-  var panel = document.getElementById('feedback-panel');
-  var body = document.getElementById('fp-body');
-  var btn = document.getElementById('fp-toggle-btn');
-  if (panel.classList.contains('open')) {
-    panel.classList.remove('open');
-    body.style.display = 'none';
-    btn.textContent = '+';
-  } else {
-    panel.classList.add('open');
-    body.style.display = 'block';
-    btn.textContent = '×';
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+    var panel = document.getElementById('feedback-panel');
+    var body = document.getElementById('fp-body');
+    var btn = document.getElementById('fp-toggle-btn');
+    if (panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        body.style.display = 'none';
+        btn.textContent = '+';
+    } else {
+        panel.classList.add('open');
+        body.style.display = 'block';
+        btn.textContent = '×';
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 function selectFbType(btn) {
-  document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
-  btn.classList.add('selected');
-  selectedFbType = btn.dataset.type;
-  document.getElementById('fb-hint').textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
+    document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    selectedFbType = btn.dataset.type;
+    var hint = document.getElementById('fb-hint');
+    if (hint) hint.textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
 }
 
 async function submitFeedback() {
-    var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
     var fbText = document.getElementById('fb-text') ? document.getElementById('fb-text').value : '';
     var moduleEl = document.getElementById('fb-module');
-    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : 'index';
-
-    if (!fbText || !fbText.trim()) {
-        var hint = document.getElementById('fb-hint');
-        if (hint) { hint.textContent = '请输入反馈内容'; hint.style.color = '#e53e3e'; }
+    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : MODULE_NAME;
+    if (!fbText.trim()) {
+        var result = document.getElementById('fb-result');
+        if (result) {
+            result.className = 'fb-result error';
+            result.textContent = '请填写反馈内容';
+            result.style.display = 'block';
+        }
         return;
     }
-
     var submitBtn = document.getElementById('fb-submit');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中...'; }
-
     try {
-        var res = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-                '类型': fbType,
-                '模块': moduleName,
-                '页面': window.location.href,
-                '反馈内容': fbText
-            })
-        });
-
-        if (res.ok) {
-            console.log('Feedback submitted successfully');
-            showFeedbackSuccess();
-        } else {
-            var errText = '提交失败 (HTTP ' + res.status + ')';
-            console.error(errText);
-            var hint = document.getElementById('fb-hint');
-            if (hint) { hint.textContent = errText; hint.style.color = '#e53e3e'; }
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+        var formData = new FormData();
+        formData.append('反馈类型', selectedFbType || '其他');
+        formData.append('模块', moduleName);
+        formData.append('反馈内容', fbText);
+        formData.append('页面', window.location.href);
+        var r = await fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+        if (!r.ok) throw new Error('network error');
+        showFeedbackSuccess();
+        var textEl = document.getElementById('fb-text');
+        if (textEl) textEl.value = '';
+        selectedFbType = '';
+        document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
+    } catch (e) {
+        var result = document.getElementById('fb-result');
+        if (result) {
+            result.className = 'fb-result error';
+            result.textContent = '提交失败，请重试或联系管理员';
+            result.style.display = 'block';
         }
-    } catch(e) {
-        console.error('Feedback submission error:', e);
-        var hint = document.getElementById('fb-hint');
-        if (hint) { hint.textContent = '网络错误，请检查网络后重试'; hint.style.color = '#e53e3e'; }
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+    } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '提交反馈'; }
     }
 }
 
 function showFeedbackSuccess() {
     var result = document.getElementById('fb-result');
-    if (!result) return;
-    result.style.display = 'block';
-    var form = document.getElementById('feedback-form');
-    if (form) form.style.display = 'none';
-    var hint = document.getElementById('fb-hint');
-    if (hint) hint.style.display = 'none';
-    var submitBtn = document.getElementById('fb-submit');
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '已提交'; }
+    if (result) {
+        result.className = 'fb-result success';
+        result.textContent = '感谢您的反馈！团队会认真阅读并尽快处理。';
+        result.style.display = 'block';
+    }
+    setTimeout(function() {
+        var panel = document.getElementById('feedback-panel');
+        var body = document.getElementById('fp-body');
+        if (panel && body) {
+            panel.classList.remove('open');
+            body.style.display = 'none';
+        }
+        var btn = document.getElementById('fp-toggle-btn');
+        if (btn) btn.textContent = '+';
+        if (result) result.style.display = 'none';
+    }, 2500);
 }
 
 </script>
+
 <div id="feedback-panel" class="feedback-panel">
     <div class="feedback-panel-header" onclick="toggleFeedback()">
-      <div class="feedback-panel-header-left">
-        <span class="fp-icon">💬</span>
-        <div>
-          <div class="fp-title">团队共创 · 反馈与建议</div>
-          <div class="fp-sub"></div>
+        <div class="feedback-panel-header-left">
+            <span class="fp-icon">💬</span>
+            <div>
+                <div class="fp-title">反馈问题</div>
+                <div class="fp-sub">帮助我们持续改进</div>
+            </div>
         </div>
-      </div>
-      <button class="fp-toggle" id="fp-toggle-btn">+</button>
+        <div id="fp-toggle-btn" class="fp-toggle-btn">+</div>
     </div>
-    <div class="feedback-panel-body" id="fp-body" style="display:none">
-      <div class="fb-type-row" id="fb-type-row">
-        <button class="fb-type-btn" data-type="错误报告" onclick="selectFbType(this)">🚦 错误报告</button>
-        <button class="fb-type-btn" data-type="内容建议" onclick="selectFbType(this)">📕 内容建议</button>
-        <button class="fb-type-btn" data-type="新功能提议" onclick="selectFbType(this)">🏣 新功能提议</button>
-        <button class="fb-type-btn" data-type="讨论交流" onclick="selectFbType(this)">💡 讨论交流</button>
-      </div>
-      <div class="fb-field">
-        <label class="fb-label">具体内容</label>
-        <textarea class="fb-textarea" id="fb-text" placeholder="请描述您的反馈内容..."></textarea>
-      </div>
-      <div class="fb-submit-row">
-        <span class="fb-hint" id="fb-hint">选择一个类型，填写内容后提交</span>
-        <button class="fb-submit" id="fb-submit" onclick="submitFeedback()">提交反馈</button>
-      </div>
-      <div class="fb-result" id="fb-result"></div>
+    <div id="fp-body" class="feedback-panel-body" style="display:none">
+        <div class="fb-type-row">
+            <button class="fb-type-btn" data-type="内容有误" onclick="selectFbType(this)">内容有误</button>
+            <button class="fb-type-btn" data-type="缺少内容" onclick="selectFbType(this)">缺少内容</button>
+            <button class="fb-type-btn" data-type="理解困难" onclick="selectFbType(this)">理解困难</button>
+            <button class="fb-type-btn" data-type="其他" onclick="selectFbType(this)">其他</button>
+        </div>
+        <textarea id="fb-text" class="fb-textarea" placeholder="请描述您的问题或建议..."></textarea>
+        <input type="hidden" id="fb-module" value="护士派单策略体系">
+        <div class="fb-submit-row">
+            <span id="fb-hint" class="fb-hint">选择类型并填写内容后提交</span>
+            <button id="fb-submit" class="fb-submit" onclick="submitFeedback()">提交反馈</button>
+        </div>
+        <div id="fb-result" class="fb-result"></div>
     </div>
-  </div>
-
-</main>
+</div>
 
 </body>
 </html>
