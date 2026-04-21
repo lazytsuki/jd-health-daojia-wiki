@@ -189,74 +189,57 @@ body {
 </div>
 
 <div class="content">
+
   <div class="section">
-    <div class="section-title"><span class="dot" style="background:var(--accent)"></span> 一、两类业务模式对比</div>
+    <div class="section-title"><span class="dot" style="background:var(--accent)"></span> 一、检测业务线 · 两段履约</div>
+    <p style="color:var(--text-dim);font-size:12px;margin-bottom:12px">护士采样 → 运力配送 → 实验室检测 → 报告产出 → 检医/检药转化</p>
+    <div class="flow-diagram">
+      <div class="flow-node hi"><div class="n-title">C端下单</div><div class="n-sub">京东入口</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">护士采样</div><div class="n-sub">上门服务</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">运力配送</div><div class="n-sub">样本送检</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">实验室</div><div class="n-sub">上机检测</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">报告页</div><div class="n-sub">大为解读</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">转化</div><div class="n-sub">检医/检药</div></div>
+    </div>
+    <ul class="text-list" style="margin-top:12px">
+      <li>参与端：C端用户(下单/看报告) + 护士端(采样) + 骑手端(配送) + 实验室端(检测) + 运营端(配置/监控)</li>
+      <li>核心能力：商品域(SKU绑定检测项目) + 履约域(运力调度) + 报告域(大为AI解读 + 六型用户分层)</li>
+      <li>本质差异：护士和实验室是两个独立责任节点，报告是独立价值交付物</li>
+    </ul>
+    <div class="insight-box accent" style="margin-top:12px">专业检测报告。报告产出和后续转化是所有环节的北极星指标。</div>
   </div>
 
-  <div class="card plain" style="margin-bottom:12px">
-    <div class="card-head card-plain">
-      <div class="card-icon" style="background:rgba(247,129,102,0.15);color:var(--accent)">🔬</div>
-      <div class="card-meta">
-        <h3>检测业务线 · 两段履约</h3>
-        <p>护士采样 → 运力配送 → 实验室检测 → 报告产出 → 检医/检药转化</p>
-      </div>
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--green)"></span> 二、护理业务线 · 一段履约</div>
+    <p style="color:var(--text-dim);font-size:12px;margin-bottom:12px">护士接单 → 上门服务 → 服务完成 → 结算</p>
+    <div class="flow-diagram">
+      <div class="flow-node hi"><div class="n-title">C端下单</div><div class="n-sub">京东入口</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">护士接单</div><div class="n-sub">抢单/派单</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node hi"><div class="n-title">上门服务</div><div class="n-sub">护理操作</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">服务完成</div><div class="n-sub">电子回单</div></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><div class="n-title">结算</div><div class="n-sub">收益到账</div></div>
     </div>
-    
-      <div class="flow-diagram">
-        <div class="flow-node hi"><div class="n-title">C端下单</div><div class="n-sub">京东入口</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">护士采样</div><div class="n-sub">上门服务</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">运力配送</div><div class="n-sub">样本送检</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node hi"><div class="n-title">实验室</div><div class="n-sub">上机检测</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node hi"><div class="n-title">报告页</div><div class="n-sub">大为解读</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node hi"><div class="n-title">转化</div><div class="n-sub">检医/检药</div>
-      </div>
-      <ul class="text-list" style="margin-top:12px">
-        <li>参与端：C端用户(下单/看报告) + 护士端(采样) + 骑手端(配送) + 实验室端(检测) + 运营端(配置/监控)</li>
-        <li>核心能力：商品域(SKU绑定检测项目) + 履约域(运力调度) + 报告域(大为AI解读 + 六型用户分层)</li>
-        <li>本质差异：护士和实验室是两个独立责任节点，报告是独立价值交付物</li>
-      </ul>
-      <div class="hi-box">核心价值：专业检测报告。报告产出和后续转化是所有环节的北极星指标。</div>
-    </div>
-  </div>
-
-  <div class="card plain">
-    <div class="card-head card-plain">
-      <div class="card-icon" style="background:rgba(63,185,80,0.15);color:var(--green)">🩺</div>
-      <div class="card-meta">
-        <h3>护理业务线 · 一段履约</h3>
-        <p>护士接单 → 上门服务 → 服务完成 → 结算</p>
-      </div>
-    </div>
-    
-      <div class="flow-diagram">
-        <div class="flow-node hi"><div class="n-title">C端下单</div><div class="n-sub">京东入口</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">护士接单</div><div class="n-sub">抢单/派单</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node hi"><div class="n-title">上门服务</div><div class="n-sub">护理操作</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">服务完成</div><div class="n-sub">电子回单</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">结算</div><div class="n-sub">收益到账</div>
-      </div>
-      <ul class="text-list" style="margin-top:12px">
-        <li>一段履约：护士独立完成全流程，无需实验室介入</li>
-        <li>无报告产出：用户感知的是"服务完成"而非"检测结果"</li>
-        <li>时效更短：从下单到完成通常在2小时内</li>
-      </ul>
-      <div class="hi-box g">核心价值：专业护士上门服务，履约效率高，无报告等待环节。</div>
-    </div>
+    <ul class="text-list" style="margin-top:12px">
+      <li>一段履约：护士独立完成全流程，无需实验室介入</li>
+      <li>无报告产出：用户感知的是"服务完成"而非"检测结果"</li>
+      <li>时效更短：从下单到完成通常在2小时内</li>
+    </ul>
+    <div class="insight-box green" style="margin-top:12px">专业护士上门服务，履约效率高，无报告等待环节。</div>
   </div>
 
   <hr class="divider">
 
   <div class="section">
-    <div class="section-title"><span class="dot" style="background:var(--blue)"></span> 二、五端角色速览</div>
+    <div class="section-title"><span class="dot" style="background:var(--blue)"></span> 三、五端角色速览</div>
     <ul class="text-list">
       <li><strong style="color:var(--accent)">C端用户侧</strong>：业务起点，入口+决策路径+两类服务模式，核心指标是检-医转化和检-药转化</li>
       <li><strong style="color:var(--blue)">B端生态</strong>：内侧消医专项(18.88%/1.99%) + 外侧医院合作，双侧驱动</li>
@@ -269,7 +252,7 @@ body {
   <hr class="divider">
 
   <div class="section">
-    <div class="section-title"><span class="dot" style="background:var(--cyan)"></span> 三、关键指标速览</div>
+    <div class="section-title"><span class="dot" style="background:var(--cyan)"></span> 四、关键指标速览</div>
     <div class="type-grid" style="grid-template-columns:repeat(3,1fr)">
       <div class="type-card">
         <div class="t" style="color:var(--red)">检-医转化</div>
@@ -289,11 +272,7 @@ body {
     </div>
   </div>
 
-  <div class="insight-box accent">
-    能画出到家服务全景图 + 区分检测/护理业务差异 + 说出五端各自的核心价值。
-  </div>
-
-</div>
+  <div class="insight-box accent" style="margin-top:16px">能画出到家服务全景图 + 区分检测/护理业务差异 + 说出五端各自的核心价值。</div>
 
 <script>
 
