@@ -349,32 +349,95 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
   const done = Object.values(mastered).filter(Boolean).length;
 async function submitFeedback() {
-    const fbType = document.getElementById('fb-type').value;
-    const fbText = document.getElementById('fb-text').value;
-    const moduleEl = document.getElementById('fb-module');
-    const moduleName = moduleEl ? moduleEl.value : 'index';
+    var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
+    var fbText = document.getElementById('fb-text') ? document.getElementById('fb-text').value : '';
+    var moduleEl = document.getElementById('fb-module');
+    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : 'index';
 
-    if (!fbText.trim()) {
-        alert('请输入反馈内容');
+    if (!fbText || !fbText.trim()) {
+        var hint = document.getElementById('fb-hint');
+        if (hint) { hint.textContent = '请输入反馈内容'; hint.style.color = '#e53e3e'; }
         return;
     }
 
-    fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-            '类型': fbType,
-            '模块': moduleName,
-            '页面': window.location.href,
-            '反馈内容': fbText
-        })
-    })
-    .then(r => r.ok ? showFeedbackSuccess() : Promise.reject())
-    .then(() => document.getElementById('feedback-form').reset())
-    .catch(() => alert('提交失败，请重试'));
+    var submitBtn = document.getElementById('fb-submit');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中...'; }
+
+    try {
+        var res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                '类型': fbType,
+                '模块': moduleName,
+                '页面': window.location.href,
+                '反馈内容': fbText
+            })
+        });
+
+        if (res.ok) {
+            console.log('Feedback submitted successfully');
+            showFeedbackSuccess();
+        } else {
+            var errText = '提交失败 (HTTP ' + res.status + ')';
+            console.error(errText);
+            var hint = document.getElementById('fb-hint');
+            if (hint) { hint.textContent = errText; hint.style.color = '#e53e3e'; }
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+        }
+    } catch(e) {
+        console.error('Feedback submission error:', e);
+        var hint = document.getElementById('fb-hint');
+        if (hint) { hint.textContent = '网络错误，请检查网络后重试'; hint.style.color = '#e53e3e'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+    }
+}
+
+function showFeedbackSuccess() {
+    var result = document.getElementById('fb-result');
+    if (!result) return;
+    result.style.display = 'block';
+    var form = document.getElementById('feedback-form');
+    if (form) form.style.display = 'none';
+    var hint = document.getElementById('fb-hint');
+    if (hint) hint.style.display = 'none';
+    var submitBtn = document.getElementById('fb-submit');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '已提交'; }
 }
 
 </script>
+
+<div id="feedback-panel" class="feedback-panel">
+    <div class="feedback-panel-header" onclick="toggleFeedback()">
+      <div class="feedback-panel-header-left">
+        <span class="fp-icon">💬</span>
+        <div>
+          <div class="fp-title">团队共创 · 反馈与建议</div>
+          <div class="fp-sub"></div>
+        </div>
+      </div>
+      <button class="fp-toggle" id="fp-toggle-btn">+</button>
+    </div>
+    <div class="feedback-panel-body" id="fp-body" style="display:none">
+      <div class="fb-type-row" id="fb-type-row">
+        <button class="fb-type-btn" data-type="错误报告" onclick="selectFbType(this)">🚦 错误报告</button>
+        <button class="fb-type-btn" data-type="内容建议" onclick="selectFbType(this)">📕 内容建议</button>
+        <button class="fb-type-btn" data-type="新功能提议" onclick="selectFbType(this)">🏣 新功能提议</button>
+        <button class="fb-type-btn" data-type="讨论交流" onclick="selectFbType(this)">💡 讨论交流</button>
+      </div>
+      <div class="fb-field">
+        <label class="fb-label">具体内容</label>
+        <textarea class="fb-textarea" id="fb-text" placeholder="请描述您的反馈内容..."></textarea>
+      </div>
+      <div class="fb-submit-row">
+        <span class="fb-hint" id="fb-hint">选择一个类型，填写内容后提交</span>
+        <button class="fb-submit" id="fb-submit" onclick="submitFeedback()">提交反馈</button>
+      </div>
+      <div class="fb-result" id="fb-result"></div>
+    </div>
+  </div>
+
+</main>
 
 </body>
 </html>

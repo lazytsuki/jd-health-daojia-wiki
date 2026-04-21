@@ -261,18 +261,8 @@ body {
 /* ── Divider ── */
 .chapter-divider { border: none; border-top: 1px solid var(--card-border); margin: 40px 0; }
 
-/* ── Progress Bar ── */
-.progress-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 10px 16px;
-  margin-bottom: 20px;
-}
-.progress-wrap .label { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+
+
 
 
 
@@ -972,37 +962,49 @@ function updateFbHint() {
 }
 
 async function submitFeedback() {
-    const fbType = document.getElementById('fb-type').value;
-    const fbText = document.getElementById('fb-text').value;
-    const moduleEl = document.getElementById('fb-module');
-    const moduleName = moduleEl ? moduleEl.value : 'index';
+    var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
+    var fbText = document.getElementById('fb-text') ? document.getElementById('fb-text').value : '';
+    var moduleEl = document.getElementById('fb-module');
+    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : 'index';
 
-    if (!fbText.trim()) {
-        alert('请输入反馈内容');
+    if (!fbText || !fbText.trim()) {
+        var hint = document.getElementById('fb-hint');
+        if (hint) { hint.textContent = '请输入反馈内容'; hint.style.color = '#e53e3e'; }
         return;
     }
 
-    fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-            '类型': fbType,
-            '模块': moduleName,
-            '页面': window.location.href,
-            '反馈内容': fbText
-        })
-    })
-    .then(r => r.ok ? showFeedbackSuccess() : Promise.reject())
-    .then(() => document.getElementById('feedback-form').reset())
-    .catch(() => alert('提交失败，请重试'));
-}
+    var submitBtn = document.getElementById('fb-submit');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中...'; }
 
-// ── Public Hub Initialization ──
-function initPublicHub() {
-  
-}
+    try {
+        var res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                '类型': fbType,
+                '模块': moduleName,
+                '页面': window.location.href,
+                '反馈内容': fbText
+            })
+        });
 
-let skipObserver = false;
+        if (res.ok) {
+            console.log('Feedback submitted successfully');
+            showFeedbackSuccess();
+        } else {
+            var errText = '提交失败 (HTTP ' + res.status + ')';
+            console.error(errText);
+            var hint = document.getElementById('fb-hint');
+            if (hint) { hint.textContent = errText; hint.style.color = '#e53e3e'; }
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+        }
+    } catch(e) {
+        console.error('Feedback submission error:', e);
+        var hint = document.getElementById('fb-hint');
+        if (hint) { hint.textContent = '网络错误，请检查网络后重试'; hint.style.color = '#e53e3e'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+    }
+}
 
 function scrollToChapter(id) {
   skipObserver = true;
@@ -1027,9 +1029,20 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.chapter').forEach(ch => observer.observe(ch));
 
-document.addEventListener('DOMContentLoaded', () => {
-  initPublicHub();
-});
+
+
+function showFeedbackSuccess() {
+    var result = document.getElementById('fb-result');
+    if (!result) return;
+    result.style.display = 'block';
+    var form = document.getElementById('feedback-form');
+    if (form) form.style.display = 'none';
+    var hint = document.getElementById('fb-hint');
+    if (hint) hint.style.display = 'none';
+    var submitBtn = document.getElementById('fb-submit');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '已提交'; }
+}
+
 </script>
 </body>
 </html>

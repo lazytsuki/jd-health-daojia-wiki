@@ -5,23 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>到家快检及上门服务平台 PRD · 模块</title>
 <style>
-:root {
-  --bg: #0d1117; --bg2: #161b22; --card-bg: #1c2128; --card-border: #30363d;
-  --text: #e6edf3; --text-dim: #8c99a8;
-  --accent: #f78166; --blue: #58a6ff; --green: #3fb950;
-  --orange: #d29922; --purple: #bc8cff; --cyan: #39c5cf; --red: #f85149;
+:root { --bg: #0d1117; --bg2: #161b22; --card-bg: #1c2128; --card-border: #30363d; --text: #e6edf3; --text-dim: #8c99a8; --accent: #f78166; --blue: #58a6ff; --green: #3fb950; --orange: #d29922; --purple: #bc8cff; --cyan: #39c5cf; --red: #f85149;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: var(--bg); color: var(--text);
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  min-height: 100vh; line-height: 1.65;
+body { background: var(--bg); color: var(--text); font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; min-height: 100vh; line-height: 1.65;
 }
-.back-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 16px; background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 8px; color: var(--text-dim); font-size: 12px;
-  text-decoration: none; margin: 20px 24px; transition: all 0.15s;
+.back-link { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text-dim); font-size: 12px; text-decoration: none; margin: 20px 24px; transition: all 0.15s;
 }
 .back-link:hover { border-color: var(--accent); color: var(--accent); }
 .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 0 24px 16px; font-size: 11px; color: var(--text-dim); }
@@ -35,21 +24,10 @@ body {
 .hero-meta { display: flex; gap: 8px; flex-wrap: wrap; }
 .meta-tag { font-size: 10px; padding: 3px 10px; border-radius: 8px; background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--card-border); }
 .meta-tag.green { background: rgba(63,185,80,0.1); color: var(--green); border-color: rgba(63,185,80,0.2); }
-.progress-wrap {
-  display: flex; align-items: center; gap: 10px; margin: 0 24px 24px;
-  background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 10px; padding: 10px 16px;
-}
-.progress-wrap .label { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
-
-
 
 .content { max-width: 820px; padding: 0 24px 60px; }
 .section { margin-bottom: 28px; }
-.section-title {
-  font-size: 11px; color: var(--text-dim); text-transform: uppercase;
-  letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px;
-  border-bottom: 1px solid var(--card-border); display: flex; align-items: center; gap: 6px;
+.section-title { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--card-border); display: flex; align-items: center; gap: 6px;
 }
 .flow-diagram { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
 .flow-node { background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 8px; padding: 8px 12px; font-size: 11px; text-align: center; min-width: 72px; }
@@ -102,463 +80,141 @@ body {
 .card.open .card-arr { transform: rotate(180deg); }
 .card-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
 .card.open .card-body { max-height: 5000px; }
-.card-body-in { padding: 0 16px 16px; }
-
-
-
-
-
-
-
-@media (max-width: 768px) {
-  .two-col, .three-col { grid-template-columns: 1fr; }
-  .back-link { margin: 16px; }
-  .breadcrumb { padding: 0 16px 12px; }
-  .hero { padding: 0 16px 20px; }
-}
-
-/* ── Feedback Panel ── */
+.card-body-in { padding: 0 16px 16px; } @media (max-width: 768px) { .two-col, .three-col { grid-template-columns: 1fr; } .back-link { margin: 16px; } .breadcrumb { padding: 0 16px 12px; } .hero { padding: 0 16px 20px; }
+} /* ── Feedback Panel ── */
 #feedback-panel { display: none; }
 #feedback-panel.open { display: block; }
-.feedback-panel {
-  background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 12px; margin-top: 36px; overflow: hidden;
+.feedback-panel { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; margin-top: 36px; overflow: hidden;
 }
-.feedback-panel-header {
-  padding: 14px 20px; border-bottom: 1px solid var(--card-border);
-  display: flex; align-items: center; justify-content: space-between;
-  cursor: pointer; user-select: none;
+.feedback-panel-header { padding: 14px 20px; border-bottom: 1px solid var(--card-border); display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none;
 }
 .feedback-panel-header-left { display: flex; align-items: center; gap: 10px; }
 .feedback-panel-header .fp-icon { font-size: 15px; }
 .feedback-panel-header .fp-title { font-size: 13px; font-weight: 600; color: var(--text); }
 .feedback-panel-header .fp-sub { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
-.fp-toggle {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--card-border); border: none;
-  color: var(--text-dim); font-size: 13px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, color 0.2s; flex-shrink: 0;
+.fp-toggle { width: 26px; height: 26px; border-radius: 50%; background: var(--card-border); border: none; color: var(--text-dim); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s; flex-shrink: 0;
 }
 .fp-toggle:hover { background: var(--accent); color: #fff; }
 .feedback-panel-body { padding: 18px 20px; }
 .fb-type-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-.fb-type-btn {
-  padding: 5px 13px; border-radius: 20px; font-size: 12px;
-  border: 1px solid var(--card-border); background: transparent;
-  color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+.fb-type-btn { padding: 5px 13px; border-radius: 20px; font-size: 12px; border: 1px solid var(--card-border); background: transparent; color: var(--text-dim); cursor: pointer; transition: all 0.15s;
 }
 .fb-type-btn:hover { border-color: var(--accent); color: var(--accent); }
 .fb-type-btn.selected { border-color: var(--accent); color: var(--accent); background: rgba(247,129,102,0.1); }
 .fb-field { margin-bottom: 10px; }
 .fb-label { font-size: 11px; color: var(--text-dim); margin-bottom: 5px; display: block; }
-.fb-textarea {
-  width: 100%; background: var(--bg); border: 1px solid var(--card-border);
-  border-radius: 8px; color: var(--text); font-family: inherit;
-  font-size: 13px; padding: 9px 13px; resize: vertical; min-height: 80px;
-  outline: none; transition: border-color 0.2s; box-sizing: border-box;
+.fb-textarea { width: 100%; background: var(--bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 13px; padding: 9px 13px; resize: vertical; min-height: 80px; outline: none; transition: border-color 0.2s; box-sizing: border-box;
 }
 .fb-textarea:focus { border-color: var(--accent); }
 .fb-textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
 .fb-submit-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
 .fb-hint { font-size: 11px; color: var(--text-dim); }
-.fb-submit {
-  padding: 7px 18px; background: var(--accent); border: none;
-  border-radius: 6px; color: #fff; font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: opacity 0.2s;
+.fb-submit { padding: 7px 18px; background: var(--accent); border: none; border-radius: 6px; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
 }
 .fb-submit:hover { opacity: 0.85; }
 .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 .fb-result { margin-top: 10px; padding: 9px 13px; border-radius: 8px; font-size: 12px; line-height: 1.6; display: none; }
 .fb-result.success { display: block; background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); color: var(--green); }
 .fb-result.error { display: block; background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3); color: var(--red); }
-.fb-result.info { display: block; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3); color: var(--blue); }
-
-</style>
+.fb-result.info { display: block; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3); color: var(--blue); } </style>
 </head>
-<body>
-
-<a href="../index.html" class="back-link">← 返回主知识图谱</a>
-<div class="breadcrumb">
-  <a href="../index.html">到家服务知识图谱</a>
-  <span>/</span>
-  <span>专题深度</span>
-  <span>/</span>
-  <span style="color:var(--text)">到家快检及上门服务平台 PRD</span>
-</div>
-
-<div class="hero">
-  <div class="hero-icon">📄</div>
-  <h1>到家快检及上门服务平台 PRD</h1>
-  <div class="sub">4.20版本 · V4.0 · 270页 · 三大核心模块系统剖析</div>
-  <div class="hero-meta">
-    <span class="meta-tag">PRD原文</span>
-    <span class="meta-tag">完整消化</span>
-    <span class="meta-tag">270页</span>
-    <span class="meta-tag green">V4.0</span>
-  </div>
-</div>
-
-<div class="insight-box" style="margin-top:12px">
-      <div class="insight-label">主线脉络</div>
-      互联网医院检测 + 护士/护工上门服务 + 平台模式全国化转型。<strong>V4.0核心变化</strong>：迪拜会议后从自营模式调整为平台模式，引入服务站站长角色，提前实现服务资源计费结算能力，新增数据看板和人工调度模块。
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 剖析视角 -->
-  <div class="section">
-    <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>剖析视角</div>
-    <div class="summary-text">
-      选择三大核心模块进行剖析：<strong>C端用户域</strong>（下单→退款全流程）、<strong>护士/服务者域</strong>（入驻→派单→结算全链路）、<strong>运营管理域</strong>（服务站·商品·实验室·耗材配置）。
-    </div>
-    <div class="flow-diagram" style="margin-top:12px">
-      <div class="flow-node hi"><div class="n-title">C端用户域</div><div class="n-sub">下单·预约·退款</div></div>
-      <span class="flow-arrow">↔</span>
-      <div class="flow-node"><div class="n-title">护士/服务者域</div><div class="n-sub">入驻·派单·结算</div></div>
-      <span class="flow-arrow">↔</span>
-      <div class="flow-node"><div class="n-title">运营管理域</div><div class="n-sub">配置·管控·数据</div></div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 模块一：C端 -->
-  <div class="section">
-    <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0"></span>模块一 · C端用户域</div>
-
-    <div class="insight-box green">
-      <div class="insight-label">核心目标</div>
-      让用户高效完成上门检测/护理服务的下单、预约、改约、取消与退款。
-    </div>
-
-    <div class="four-card" style="margin-top:12px">
-      <h5 style="color:var(--orange)">业务身份与下单模式</h5>
-      <table class="strike-table">
-        <tr><th>业务身份</th><th>入口</th><th>履约模式</th><th>关键特征</th></tr>
-        <tr><td>小鸟快验</td><td>小程序（检测）</td><td>派单制，提前1天预约</td><td>护士接单生成服务码，样本绑定条码</td></tr>
-        <tr><td>金牌护士</td><td>APP（护理）</td><td>抢单制，即时/预约</td><td>多次核销（1 SKU服务N次），医患签字</td></tr>
-        <tr><td>自营/非自营护士</td><td>平台统一入口</td><td>派单制</td><td>排期数据来源不同</td></tr>
-      </table>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--purple)">两类服务核心差异</h5>
-      <table class="strike-table">
-        <tr><th>对比项</th><th>上门检测</th><th>上门护理</th></tr>
-        <tr><td>商品金额</td><td>含服务费+护士上门费+耗材，一次结清</td><td>耗材包单独付费（建议整合）</td></tr>
-        <tr><td>采样方式</td><td>护士采样，绑定样本条码寄送实验室</td><td>护士采样，医患签字确认</td></tr>
-        <tr><td>预约方式</td><td>小鸟快验仅预约次日，按小时排期</td><td>无严格围栏，按三级城市范围</td></tr>
-        <tr><td>履约完成标志</td><td>样本寄出+实验室确认</td><td>医患签字+服务记录上传</td></tr>
-        <tr><td>一品多次</td><td>否</td><td>是（1 SKU上门N次，逐次核销）</td></tr>
-      </table>
-    </div>
-
-    <div class="insight-box orange" style="margin-top:12px">
-      <div class="insight-label">关键业务准则</div>
-      <ul style="list-style:none;padding:0;margin-top:6px">
-        <li style="padding:3px 0;font-size:11.5px">・用户支付成功即生成服务单，无需用户操作；一个服务单可能对应多个样本条码</li>
-        <li style="padding:3px 0;font-size:11.5px">・退款：护士接单前全额；护士上门后不支持主动取消，走投诉/仲裁；样本已寄出不支持退款</li>
-        <li style="padding:3px 0;font-size:11.5px">・围栏校验：呼吸道检测有地理围栏限制，围栏内无护士资源则阻止下单</li>
-        <li style="padding:3px 0;font-size:11.5px">・实验室匹配：下单时按检测项目实时匹配可服务的实验室</li>
-      </ul>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 模块二：护士端 -->
-  <div class="section">
-    <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0"></span>模块二 · 护士/服务者域</div>
-
-    <div class="insight-box green">
-      <div class="insight-label">核心目标</div>
-      建立可管控的护士入驻→服务→结算全链路，确保平台模式下的服务质量与成本可控。
-    </div>
-
-    <div class="four-card" style="margin-top:12px">
-      <h5 style="color:var(--blue)">入驻流程（三审四核）</h5>
-      <table class="strike-table">
-        <tr><th>阶段</th><th>审批方</th><th>审批内容</th></tr>
-        <tr><td>身份审核</td><td>质控（ERP竞签）</td><td>执业信息、身份证、资质证照片</td></tr>
-        <tr><td>技能认证</td><td>运营（ERP竞签）</td><td>服务项目点亮（技能=服务项目）</td></tr>
-        <tr><td>开放城市校验</td><td>系统</td><td>注册时校验城市是否开通</td></tr>
-      </table>
-      <div style="margin-top:8px;font-size:11px;color:var(--text-dim)">
-        <strong style="color:var(--text)">关键约束：</strong>一个Pin多个角色（护士+护工+康复师）共享同一Pin；人员标签（全职/兼职）打在Pin维度；全职运营统一排期，兼职自主排期。
-      </div>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--accent)">派单策略体系（核心）</h5>
-      <div class="flow-diagram" style="margin:8px 0">
-        <div class="flow-node"><div class="n-title">即时单</div><div class="n-sub">立即派单</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">派3次×30秒</div><div class="n-sub">全职优先</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">加价抢单</div><div class="n-sub">3次×30分钟</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node hi"><div class="n-title">人工调度</div><div class="n-sub">短信通知运营</div></div>
-      </div>
-      <table class="strike-table">
-        <tr><th>派单分因子</th><th>权重</th><th>数据时效</th></tr>
-        <tr><td>距离</td><td>30%</td><td>实时</td></tr>
-        <tr><td>护士结算价</td><td>20%</td><td>实时</td></tr>
-        <tr><td>准点率/完单率/接单率/好评率</td><td>各10%</td><td>T+1</td></tr>
-        <tr><td>新人福利分</td><td>10%</td><td>T+1清零</td></tr>
-      </table>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--orange)">耗材管理体系</h5>
-      <div style="font-size:11.5px;line-height:1.8">
-        <strong>核销逻辑：</strong>派单前<strong style="color:var(--accent)">预占</strong> → 接单后<strong style="color:var(--orange)">核销(-n)</strong> → 取消时<strong style="color:var(--green)">释放(+n)</strong><br>
-        <strong>警示规则：</strong>任意耗材≤3时，护士端顶部提示"耗材不足，请及时采购"
-      </div>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--purple)">结算规则</h5>
-      <div style="font-size:11.5px;line-height:1.8">
-        <div><strong style="color:var(--text)">结算节点：</strong>服务完成 → 生成"冻结"结算单</div>
-        <div><strong style="color:var(--text)">解冻条件：</strong>护士上传"医疗废物垃圾"处理照片</div>
-        <div><strong style="color:var(--text)">账期：</strong>解冻后3天可提现，平台扣手续费</div>
-        <div><strong style="color:var(--text)">一品多次：</strong>按次结算；<strong style="color:var(--text)">耗材单独付费：</strong>分两笔结算单（服务费+耗材费）</div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 模块三：运营管理域 -->
-  <div class="section">
-    <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0"></span>模块三 · 运营管理域</div>
-
-    <div class="insight-box orange">
-      <div class="insight-label">核心目标</div>
-      搭建可配置的运营基础设施，实现服务站·护士·商品·实验室·耗材的全链路管控。
-    </div>
-
-    <div class="four-card" style="margin-top:12px">
-      <h5 style="color:var(--cyan)">配置层次全景</h5>
-      <div style="font-size:11px;line-height:1.9;color:var(--text-dim)">
-        <strong style="color:var(--text)">平台层：</strong>开放城市管理 / 标品库（国家标准） / 实验室管理 / 指标管理<br>
-        <strong style="color:var(--text)">服务站层：</strong>服务站管理（围栏/营业时间/达达门店）→ 服务站商品管理 → 服务站服务资源管理（全职护士绑定到站）<br>
-        <strong style="color:var(--text)">商品层：</strong>商品项目管理（SKU+业务身份+检测项目）→ 加项管理（主SKU↔子SKU）→ 活动管理（爆单调控/时段费减免）<br>
-        <strong style="color:var(--text)">护士层：</strong>服务资源管理（入驻审核/技能认证/标签）→ 排期日历 → 耗材管理
-      </div>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--red)">服务单拆分规则（核心业务准则）</h5>
-      <div style="font-size:11.5px;line-height:1.8">
-        <ul style="list-style:none;padding:0">
-          <li style="padding:3px 0">・<strong>一单一品：</strong>多SKU订单按一品一单拆解</li>
-          <li style="padding:3px 0">・<strong>检测项目最小单元：</strong>1检测项目 = 1服务单 = 1耗材包 = 1护士 = 1实验室</li>
-          <li style="padding:3px 0">・<strong>多实验室支持：</strong>不同检测项目可送检不同实验室</li>
-          <li style="padding:3px 0">・<strong>报告聚合：</strong>按检测人维度汇总所有检测结果</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--purple)">实验室匹配策略（可配置优先级）</h5>
-      <div style="font-size:11.5px;line-height:1.8">
-        <strong>优先级选项：</strong>整单（覆盖项目最多）→ 时效（距离最近） → 成本（结算价最低） → 兜底（创建时间最早）<br>
-        <strong>Promise出报告时间：</strong>上门骑行时间 + 服务时长 + 回寄时间 + 检测时长
-      </div>
-    </div>
-
-    <div class="insight-box red" style="margin-top:12px">
-      <div class="insight-label">关键配置生效规则（系统稳定性关键）</div>
-      商品/实验室项目修改时：<strong>已支付订单按快照履约，新支付订单按新数据</strong>。所有快照必须存储在订单/服务单/检测单上。
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 全局串联 -->
-  <div class="section">
-    <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--purple);flex-shrink:0"></span>全局串联 · 跨模块联动</div>
-
-    <div class="four-card">
-      <h5 style="color:var(--blue)">① 模块间信息流转</h5>
-      <div class="flow-diagram" style="margin:8px 0">
-        <div class="flow-node"><div class="n-title">C端下单</div><div class="n-sub"></div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">订单/拆服务单</div><div class="n-sub">检测项目维度</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">派单系统</div><div class="n-sub">派单分计算</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">护士接单</div><div class="n-sub">耗材核销</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node"><div class="n-title">实验室</div><div class="n-sub">报告回传</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-node hi"><div class="n-title">结算/提现</div><div class="n-sub"></div></div>
-      </div>
-    </div>
-
-    <div class="four-card" style="margin-top:10px">
-      <h5 style="color:var(--orange)">② 核心状态同步</h5>
-      <table class="strike-table">
-        <tr><th>场景</th><th>影响范围</th><th>处理逻辑</th></tr>
-        <tr><td>护士接单前取消</td><td>停止派单策略</td><td>预占库存释放(+n)</td></tr>
-        <tr><td>护士接单后退款</td><td>解绑护士+时段释放</td><td>耗材库存释放(+n)+订单重回派单池</td></tr>
-        <tr><td>护士取消接单</td><td>派单系统收到通知</td><td>重新执行派单策略+T+1影响派单分</td></tr>
-        <tr><td>服务单→订单联动</td><td>三业务身份差异化</td><td>按业务身份决定各状态对应的订单展示</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 风险点 -->
-  <div class="section">
-    <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0"></span>潜在风险点</div>
-    <table class="risk-table">
-      <tr><th>风险点</th><th>描述</th><th>等级</th></tr>
-      <tr>
-        <td>快照数据一致性</td>
-        <td>商品/实验室修改后老订单快照是否仍有效；算价服务异常时结算价基准；耗材停用后已接单护士如何处理</td>
-        <td class="level-high">高</td>
-      </tr>
-      <tr>
-        <td>双向状态同步丢失</td>
-        <td>护士端状态推进→调用消医侧接口；若接口超时/失败，护士端已推进但订单侧卡住；缺异步重试机制和超时告警</td>
-        <td class="level-high">高</td>
-      </tr>
-      <tr>
-        <td>耗材库存超卖</td>
-        <td>派单预占库存但接单才核销；并发场景同一护士被多订单同时派单均预占成功；其他订单预占未及时释放</td>
-        <td class="level-high">高</td>
-      </tr>
-      <tr>
-        <td>多实验室报告聚合</td>
-        <td>C端需等所有服务单报告齐备才聚合；部分报告延迟vs检测失败需明确区分用户感知</td>
-        <td class="level-med">中</td>
-      </tr>
-      <tr>
-        <td>派单分数据实时性</td>
-        <td>准点率等为T+1；新人护士派单分60%依赖实时因子，公平性感未知；价格调整后历史订单预估收入不一致</td>
-        <td class="level-med">中</td>
-      </tr>
-      <tr>
-        <td>一品多次退款场景</td>
-        <td>部分次数完成后用户退款；退剩余未核销次数还是全额；已核销次数的结算如何回退</td>
-        <td class="level-low">低</td>
-      </tr>
-    </table>
-  </div>
-
-  <hr class="divider">
-
-  
-  <div class="section">
-    
-
-    <div class="card" id="quiz1">
-      
-      <div class="card-body">
-        <div class="card-body-in">
-          </div>
-      </div>
-    </div>
-
-    <div class="card" id="quiz2">
-      
-      <div class="card-body">
-        <div class="card-body-in">
-          </div>
-      </div>
-    </div>
-
-    <div class="card" id="quiz3">
-      
-      <div class="card-body">
-        <div class="card-body-in">
-          </div>
-      </div>
-    </div>
-
-    <div class="card" id="quiz4">
-      
-      <div class="card-body">
-        <div class="card-body-in">
-          </div>
-      </div>
-    </div>
-  </div>
-
-  </div>
-
-<script>
-
-// Progress tracking
-function updateProgress() {
-  const total = 4; // 4 quizzes
-  const done = Object.values(mastered).filter(Boolean).length;
-  const pct = total > 0 ? Math.round(done / total * 100) : 0;
-  if (mastered[MODULE_ID]) {
-  }
-}
-document.addEventListener('DOMContentLoaded', updateProgress);
-
-// ── Feedback System ──
+<body> <a href="../index.html" class="back-link">← 返回主知识图谱</a>
+<div class="breadcrumb"> <a href="../index.html">到家服务知识图谱</a> <span>/</span> <span>专题深度</span> <span>/</span> <span style="color:var(--text)">到家快检及上门服务平台 PRD</span>
+</div> <div class="hero"> <div class="hero-icon">📄</div> <h1>到家快检及上门服务平台 PRD</h1> <div class="sub">到家快检及上门服务平台核心模块系统剖析</div> <div class="hero-meta"> <span class="meta-tag green">V4.0</span> </div>
+</div> <div class="insight-box" style="margin-top:12px"> <div class="insight-label">主线脉络</div> 互联网医院检测 + 护士/护工上门服务 + 平台模式全国化转型。<strong>V4.0核心变化</strong>：迪拜会议后从自营模式调整为平台模式，引入服务站站长角色，提前实现服务资源计费结算能力，新增数据看板和人工调度模块。 </div> </div> <hr class="divider"> <!-- 剖析视角 --> <div class="section"> <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>剖析视角</div> <div class="summary-text"> 选择三大核心模块进行剖析：<strong>C端用户域</strong>（下单→退款全流程）、<strong>护士/服务者域</strong>（入驻→派单→结算全链路）、<strong>运营管理域</strong>（服务站·商品·实验室·耗材配置）。 </div> <div class="flow-diagram" style="margin-top:12px"> <div class="flow-node hi"><div class="n-title">C端用户域</div><div class="n-sub">下单·预约·退款</div></div> <span class="flow-arrow">↔</span> <div class="flow-node"><div class="n-title">护士/服务者域</div><div class="n-sub">入驻·派单·结算</div></div> <span class="flow-arrow">↔</span> <div class="flow-node"><div class="n-title">运营管理域</div><div class="n-sub">配置·管控·数据</div></div> </div> </div> <hr class="divider"> <!-- 模块一：C端 --> <div class="section"> <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0"></span>模块一 · C端用户域</div> <div class="insight-box green"> <div class="insight-label">核心目标</div> 让用户高效完成上门检测/护理服务的下单、预约、改约、取消与退款。 </div> <div class="four-card" style="margin-top:12px"> <h5 style="color:var(--orange)">业务身份与下单模式</h5> <table class="strike-table"> <tr><th>业务身份</th><th>入口</th><th>履约模式</th><th>关键特征</th></tr> <tr><td>小鸟快验</td><td>小程序（检测）</td><td>派单制，提前1天预约</td><td>护士接单生成服务码，样本绑定条码</td></tr> <tr><td>金牌护士</td><td>APP（护理）</td><td>抢单制，即时/预约</td><td>多次核销（1 SKU服务N次），医患签字</td></tr> <tr><td>自营/非自营护士</td><td>平台统一入口</td><td>派单制</td><td>排期数据来源不同</td></tr> </table> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--purple)">两类服务核心差异</h5> <table class="strike-table"> <tr><th>对比项</th><th>上门检测</th><th>上门护理</th></tr> <tr><td>商品金额</td><td>含服务费+护士上门费+耗材，一次结清</td><td>耗材包单独付费（建议整合）</td></tr> <tr><td>采样方式</td><td>护士采样，绑定样本条码寄送实验室</td><td>护士采样，医患签字确认</td></tr> <tr><td>预约方式</td><td>小鸟快验仅预约次日，按小时排期</td><td>无严格围栏，按三级城市范围</td></tr> <tr><td>履约完成标志</td><td>样本寄出+实验室确认</td><td>医患签字+服务记录上传</td></tr> <tr><td>一品多次</td><td>否</td><td>是（1 SKU上门N次，逐次核销）</td></tr> </table> </div> <div class="insight-box orange" style="margin-top:12px"> <div class="insight-label">关键业务准则</div> <ul style="list-style:none;padding:0;margin-top:6px"> <li style="padding:3px 0;font-size:11.5px">・用户支付成功即生成服务单，无需用户操作；一个服务单可能对应多个样本条码</li> <li style="padding:3px 0;font-size:11.5px">・退款：护士接单前全额；护士上门后不支持主动取消，走投诉/仲裁；样本已寄出不支持退款</li> <li style="padding:3px 0;font-size:11.5px">・围栏校验：呼吸道检测有地理围栏限制，围栏内无护士资源则阻止下单</li> <li style="padding:3px 0;font-size:11.5px">・实验室匹配：下单时按检测项目实时匹配可服务的实验室</li> </ul> </div> </div> <hr class="divider"> <!-- 模块二：护士端 --> <div class="section"> <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0"></span>模块二 · 护士/服务者域</div> <div class="insight-box green"> <div class="insight-label">核心目标</div> 建立可管控的护士入驻→服务→结算全链路，确保平台模式下的服务质量与成本可控。 </div> <div class="four-card" style="margin-top:12px"> <h5 style="color:var(--blue)">入驻流程（三审四核）</h5> <table class="strike-table"> <tr><th>阶段</th><th>审批方</th><th>审批内容</th></tr> <tr><td>身份审核</td><td>质控（ERP竞签）</td><td>执业信息、身份证、资质证照片</td></tr> <tr><td>技能认证</td><td>运营（ERP竞签）</td><td>服务项目点亮（技能=服务项目）</td></tr> <tr><td>开放城市校验</td><td>系统</td><td>注册时校验城市是否开通</td></tr> </table> <div style="margin-top:8px;font-size:11px;color:var(--text-dim)"> <strong style="color:var(--text)">关键约束：</strong>一个Pin多个角色（护士+护工+康复师）共享同一Pin；人员标签（全职/兼职）打在Pin维度；全职运营统一排期，兼职自主排期。 </div> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--accent)">派单策略体系（核心）</h5> <div class="flow-diagram" style="margin:8px 0"> <div class="flow-node"><div class="n-title">即时单</div><div class="n-sub">立即派单</div></div> <span class="flow-arrow">→</span> <div class="flow-node"><div class="n-title">派3次×30秒</div><div class="n-sub">全职优先</div></div> <span class="flow-arrow">→</span> <div class="flow-node"><div class="n-title">加价抢单</div><div class="n-sub">3次×30分钟</div></div> <span class="flow-arrow">→</span> <div class="flow-node hi"><div class="n-title">人工调度</div><div class="n-sub">短信通知运营</div></div> </div> <table class="strike-table"> <tr><th>派单分因子</th><th>权重</th><th>数据时效</th></tr> <tr><td>距离</td><td>30%</td><td>实时</td></tr> <tr><td>护士结算价</td><td>20%</td><td>实时</td></tr> <tr><td>准点率/完单率/接单率/好评率</td><td>各10%</td><td>T+1</td></tr> <tr><td>新人福利分</td><td>10%</td><td>T+1清零</td></tr> </table> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--orange)">耗材管理体系</h5> <div style="font-size:11.5px;line-height:1.8"> <strong>核销逻辑：</strong>派单前<strong style="color:var(--accent)">预占</strong> → 接单后<strong style="color:var(--orange)">核销(-n)</strong> → 取消时<strong style="color:var(--green)">释放(+n)</strong><br> <strong>警示规则：</strong>任意耗材≤3时，护士端顶部提示"耗材不足，请及时采购" </div> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--purple)">结算规则</h5> <div style="font-size:11.5px;line-height:1.8"> <div><strong style="color:var(--text)">结算节点：</strong>服务完成 → 生成"冻结"结算单</div> <div><strong style="color:var(--text)">解冻条件：</strong>护士上传"医疗废物垃圾"处理照片</div> <div><strong style="color:var(--text)">账期：</strong>解冻后3天可提现，平台扣手续费</div> <div><strong style="color:var(--text)">一品多次：</strong>按次结算；<strong style="color:var(--text)">耗材单独付费：</strong>分两笔结算单（服务费+耗材费）</div> </div> </div> </div> <hr class="divider"> <!-- 模块三：运营管理域 --> <div class="section"> <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0"></span>模块三 · 运营管理域</div> <div class="insight-box orange"> <div class="insight-label">核心目标</div> 搭建可配置的运营基础设施，实现服务站·护士·商品·实验室·耗材的全链路管控。 </div> <div class="four-card" style="margin-top:12px"> <h5 style="color:var(--cyan)">配置层次全景</h5> <div style="font-size:11px;line-height:1.9;color:var(--text-dim)"> <strong style="color:var(--text)">平台层：</strong>开放城市管理 / 标品库（国家标准） / 实验室管理 / 指标管理<br> <strong style="color:var(--text)">服务站层：</strong>服务站管理（围栏/营业时间/达达门店）→ 服务站商品管理 → 服务站服务资源管理（全职护士绑定到站）<br> <strong style="color:var(--text)">商品层：</strong>商品项目管理（SKU+业务身份+检测项目）→ 加项管理（主SKU↔子SKU）→ 活动管理（爆单调控/时段费减免）<br> <strong style="color:var(--text)">护士层：</strong>服务资源管理（入驻审核/技能认证/标签）→ 排期日历 → 耗材管理 </div> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--red)">服务单拆分规则（核心业务准则）</h5> <div style="font-size:11.5px;line-height:1.8"> <ul style="list-style:none;padding:0"> <li style="padding:3px 0">・<strong>一单一品：</strong>多SKU订单按一品一单拆解</li> <li style="padding:3px 0">・<strong>检测项目最小单元：</strong>1检测项目 = 1服务单 = 1耗材包 = 1护士 = 1实验室</li> <li style="padding:3px 0">・<strong>多实验室支持：</strong>不同检测项目可送检不同实验室</li> <li style="padding:3px 0">・<strong>报告聚合：</strong>按检测人维度汇总所有检测结果</li> </ul> </div> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--purple)">实验室匹配策略（可配置优先级）</h5> <div style="font-size:11.5px;line-height:1.8"> <strong>优先级选项：</strong>整单（覆盖项目最多）→ 时效（距离最近） → 成本（结算价最低） → 兜底（创建时间最早）<br> <strong>Promise出报告时间：</strong>上门骑行时间 + 服务时长 + 回寄时间 + 检测时长 </div> </div> <div class="insight-box red" style="margin-top:12px"> <div class="insight-label">关键配置生效规则（系统稳定性关键）</div> 商品/实验室项目修改时：<strong>已支付订单按快照履约，新支付订单按新数据</strong>。所有快照必须存储在订单/服务单/检测单上。 </div> </div> <hr class="divider"> <!-- 全局串联 --> <div class="section"> <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--purple);flex-shrink:0"></span>全局串联 · 跨模块联动</div> <div class="four-card"> <h5 style="color:var(--blue)">① 模块间信息流转</h5> <div class="flow-diagram" style="margin:8px 0"> <div class="flow-node"><div class="n-title">C端下单</div><div class="n-sub"></div></div> <span class="flow-arrow">→</span> <div class="flow-node"><div class="n-title">订单/拆服务单</div><div class="n-sub">检测项目维度</div></div> <span class="flow-arrow">→</span> <div class="flow-node"><div class="n-title">派单系统</div><div class="n-sub">派单分计算</div></div> <span class="flow-arrow">→</span> <div class="flow-node"><div class="n-title">护士接单</div><div class="n-sub">耗材核销</div></div> <span class="flow-arrow">→</span> <div class="flow-node"><div class="n-title">实验室</div><div class="n-sub">报告回传</div></div> <span class="flow-arrow">→</span> <div class="flow-node hi"><div class="n-title">结算/提现</div><div class="n-sub"></div></div> </div> </div> <div class="four-card" style="margin-top:10px"> <h5 style="color:var(--orange)">② 核心状态同步</h5> <table class="strike-table"> <tr><th>场景</th><th>影响范围</th><th>处理逻辑</th></tr> <tr><td>护士接单前取消</td><td>停止派单策略</td><td>预占库存释放(+n)</td></tr> <tr><td>护士接单后退款</td><td>解绑护士+时段释放</td><td>耗材库存释放(+n)+订单重回派单池</td></tr> <tr><td>护士取消接单</td><td>派单系统收到通知</td><td>重新执行派单策略+T+1影响派单分</td></tr> <tr><td>服务单→订单联动</td><td>三业务身份差异化</td><td>按业务身份决定各状态对应的订单展示</td></tr> </table> </div> </div> <hr class="divider"> <!-- 风险点 --> <div class="section"> <div class="section-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0"></span>潜在风险点</div> <table class="risk-table"> <tr><th>风险点</th><th>描述</th><th>等级</th></tr> <tr> <td>快照数据一致性</td> <td>商品/实验室修改后老订单快照是否仍有效；算价服务异常时结算价基准；耗材停用后已接单护士如何处理</td> <td class="level-high">高</td> </tr> <tr> <td>双向状态同步丢失</td> <td>护士端状态推进→调用消医侧接口；若接口超时/失败，护士端已推进但订单侧卡住；缺异步重试机制和超时告警</td> <td class="level-high">高</td> </tr> <tr> <td>耗材库存超卖</td> <td>派单预占库存但接单才核销；并发场景同一护士被多订单同时派单均预占成功；其他订单预占未及时释放</td> <td class="level-high">高</td> </tr> <tr> <td>多实验室报告聚合</td> <td>C端需等所有服务单报告齐备才聚合；部分报告延迟vs检测失败需明确区分用户感知</td> <td class="level-med">中</td> </tr> <tr> <td>派单分数据实时性</td> <td>准点率等为T+1；新人护士派单分60%依赖实时因子，公平性感未知；价格调整后历史订单预估收入不一致</td> <td class="level-med">中</td> </tr> <tr> <td>一品多次退款场景</td> <td>部分次数完成后用户退款；退剩余未核销次数还是全额；已核销次数的结算如何回退</td> <td class="level-low">低</td> </tr> </table> </div> <hr class="divider">  </div> <script> 
+ // ── Feedback System ──
 let selectedFbType = '';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkokvpkn';
-const MODULE_NAME = '到家快检平台PRD消化';
+const MODULE_NAME = '到家快检平台PRD消化'; function toggleFeedback() { var panel = document.getElementById('feedback-panel'); var body = document.getElementById('fp-body'); var btn = document.getElementById('fp-toggle-btn'); if (panel.classList.contains('open')) { panel.classList.remove('open'); body.style.display = 'none'; btn.textContent = '+'; } else { panel.classList.add('open'); body.style.display = 'block'; btn.textContent = '×'; panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+} function selectFbType(btn) { document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); }); btn.classList.add('selected'); selectedFbType = btn.dataset.type; document.getElementById('fb-hint').textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
+} async function submitFeedback() {
+    var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
+    var fbText = document.getElementById('fb-text') ? document.getElementById('fb-text').value : '';
+    var moduleEl = document.getElementById('fb-module');
+    var moduleName = moduleEl && moduleEl.value ? moduleEl.value : 'index';
 
-function toggleFeedback() {
-  var panel = document.getElementById('feedback-panel');
-  var body = document.getElementById('fp-body');
-  var btn = document.getElementById('fp-toggle-btn');
-  if (panel.classList.contains('open')) {
-    panel.classList.remove('open');
-    body.style.display = 'none';
-    btn.textContent = '+';
-  } else {
-    panel.classList.add('open');
-    body.style.display = 'block';
-    btn.textContent = '×';
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function selectFbType(btn) {
-  document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); });
-  btn.classList.add('selected');
-  selectedFbType = btn.dataset.type;
-  document.getElementById('fb-hint').textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
-}
-
-async function submitFeedback() {
-    const fbType = document.getElementById('fb-type').value;
-    const fbText = document.getElementById('fb-text').value;
-    const moduleEl = document.getElementById('fb-module');
-    const moduleName = moduleEl ? moduleEl.value : 'index';
-
-    if (!fbText.trim()) {
-        alert('请输入反馈内容');
+    if (!fbText || !fbText.trim()) {
+        var hint = document.getElementById('fb-hint');
+        if (hint) { hint.textContent = '请输入反馈内容'; hint.style.color = '#e53e3e'; }
         return;
     }
 
-    fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-            '类型': fbType,
-            '模块': moduleName,
-            '页面': window.location.href,
-            '反馈内容': fbText
-        })
-    })
-    .then(r => r.ok ? showFeedbackSuccess() : Promise.reject())
-    .then(() => document.getElementById('feedback-form').reset())
-    .catch(() => alert('提交失败，请重试'));
+    var submitBtn = document.getElementById('fb-submit');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中...'; }
+
+    try {
+        var res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                '类型': fbType,
+                '模块': moduleName,
+                '页面': window.location.href,
+                '反馈内容': fbText
+            })
+        });
+
+        if (res.ok) {
+            console.log('Feedback submitted successfully');
+            showFeedbackSuccess();
+        } else {
+            var errText = '提交失败 (HTTP ' + res.status + ')';
+            console.error(errText);
+            var hint = document.getElementById('fb-hint');
+            if (hint) { hint.textContent = errText; hint.style.color = '#e53e3e'; }
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+        }
+    } catch(e) {
+        console.error('Feedback submission error:', e);
+        var hint = document.getElementById('fb-hint');
+        if (hint) { hint.textContent = '网络错误，请检查网络后重试'; hint.style.color = '#e53e3e'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '重新提交'; }
+    }
 }
 
-</script>
+function showFeedbackSuccess() {
+    var result = document.getElementById('fb-result');
+    if (!result) return;
+    result.style.display = 'block';
+    var form = document.getElementById('feedback-form');
+    if (form) form.style.display = 'none';
+    var hint = document.getElementById('fb-hint');
+    if (hint) hint.style.display = 'none';
+    var submitBtn = document.getElementById('fb-submit');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '已提交'; }
+}
+
+</script> <div id="feedback-panel" class="feedback-panel">
+    <div class="feedback-panel-header" onclick="toggleFeedback()">
+      <div class="feedback-panel-header-left">
+        <span class="fp-icon">💬</span>
+        <div>
+          <div class="fp-title">团队共创 · 反馈与建议</div>
+          <div class="fp-sub"></div>
+        </div>
+      </div>
+      <button class="fp-toggle" id="fp-toggle-btn">+</button>
+    </div>
+    <div class="feedback-panel-body" id="fp-body" style="display:none">
+      <div class="fb-type-row" id="fb-type-row">
+        <button class="fb-type-btn" data-type="错误报告" onclick="selectFbType(this)">🚦 错误报告</button>
+        <button class="fb-type-btn" data-type="内容建议" onclick="selectFbType(this)">📕 内容建议</button>
+        <button class="fb-type-btn" data-type="新功能提议" onclick="selectFbType(this)">🏣 新功能提议</button>
+        <button class="fb-type-btn" data-type="讨论交流" onclick="selectFbType(this)">💡 讨论交流</button>
+      </div>
+      <div class="fb-field">
+        <label class="fb-label">具体内容</label>
+        <textarea class="fb-textarea" id="fb-text" placeholder="请描述您的反馈内容..."></textarea>
+      </div>
+      <div class="fb-submit-row">
+        <span class="fb-hint" id="fb-hint">选择一个类型，填写内容后提交</span>
+        <button class="fb-submit" id="fb-submit" onclick="submitFeedback()">提交反馈</button>
+      </div>
+      <div class="fb-result" id="fb-result"></div>
+    </div>
+  </div>
+
+</main>
 
 </body>
 </html>
