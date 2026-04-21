@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>到家快检及上门服务平台 PRD · 模块</title>
+<title>到家快检及上门服务平台</title>
 <style>
 :root { --bg: #0d1117; --bg2: #161b22; --card-bg: #1c2128; --card-border: #30363d; --text: #e6edf3; --text-dim: #8c99a8; --accent: #f78166; --blue: #58a6ff; --green: #3fb950; --orange: #d29922; --purple: #bc8cff; --cyan: #39c5cf; --red: #f85149;
 }
@@ -125,7 +125,7 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, 'P
  // ── Feedback System ──
 let selectedFbType = '';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkokvpkn';
-const MODULE_NAME = '到家快检平台PRD消化'; function toggleFeedback() { var panel = document.getElementById('feedback-panel'); var body = document.getElementById('fp-body'); var btn = document.getElementById('fp-toggle-btn'); if (panel.classList.contains('open')) { panel.classList.remove('open'); body.style.display = 'none'; btn.textContent = '+'; } else { panel.classList.add('open'); body.style.display = 'block'; btn.textContent = '×'; panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+const MODULE_NAME = '到家快检平台'; function toggleFeedback() { var panel = document.getElementById('feedback-panel'); var body = document.getElementById('fp-body'); var btn = document.getElementById('fp-toggle-btn'); if (panel.classList.contains('open')) { panel.classList.remove('open'); body.style.display = 'none'; btn.textContent = '+'; } else { panel.classList.add('open'); body.style.display = 'block'; btn.textContent = '×'; panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
 } function selectFbType(btn) { document.querySelectorAll('.fb-type-btn').forEach(function(b) { b.classList.remove('selected'); }); btn.classList.add('selected'); selectedFbType = btn.dataset.type; document.getElementById('fb-hint').textContent = '已选择：' + selectedFbType + ' · 填写完成后点击提交';
 } async function submitFeedback() {
     var fbType = document.getElementById('fb-type') ? document.getElementById('fb-type').value : '其他';
